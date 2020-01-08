@@ -1,5 +1,10 @@
 img {
     width: 60px;
     height: 60px;
+}
 
+.card-panel{
+   box-shadow: aqua;
+   border: 1px solid;
+  border-color: lightskyblue;
 }
