@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Chore = sequelize.define('Chore', {
+  const Reward = sequelize.define('Reward', {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -13,5 +13,5 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 0,
     },
   });
-  return Chore;
+  return Reward;
 };
