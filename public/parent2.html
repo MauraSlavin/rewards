@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+    <title> Child 1 Chores </title>
+</head>
+
+<body>
+    <div class="navbar-fixed">
+        <nav class="teal">
+            <!-- <div class="container"> -->
+                <div class="nav-wrapper">
+                    <a href="#!" class="brand-logo center">My Daily Chores</a>
+                    <a href="#" data-target="mobile-demo" class="sidenav-trigger">
+                        <i class="material-icons">menu</i>
+                    </a>
+                    <ul class="left hide-on-med-and-down">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="parent1.html">Parent 1</a></li>
+                        <li><a href="parent2.html">Parent 2</a></li>
+                        <li><a href="child1.html">Child 1</a></li>
+                        <li><a href="child2.html">Child 2</a></li>
+                    </ul>
+                    <ul class="right hide-on-med-and-down">
+                    <li><a href="iconLibrary.html">Icons</a></li>
+                    </ul>
+                </div>
+            <!-- </div> -->
+        </nav>
+    </div>
+
+    <ul class="sidenav" id="mobile-demo">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="parent1.html">Parent 1</a></li>
+        <li><a href="parent2.html">Parent 2</a></li>
+        <li><a href="child1.html">Child 1</a></li>
+        <li><a href="child2.html">Child 2</a></li>
+    </ul>
+
+    <section class="section section-icons grey lighten-4 center">
+        <div class="container">
+            <h3 class="teal-text center">Parent Log In</h1>
+        </div>
+
+   
+
+    </section>
+
+
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script>
+        //side nav
+        const sideNav = document.querySelector(".sidenav");
+        M.Sidenav.init(sideNav, {});
+    </script>
+
+</body>
+
+</html>
