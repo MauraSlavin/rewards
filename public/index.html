@@ -1,22 +1,278 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="style.css">
 
-    <title>Hello, world!</title>
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
+    <title> My Chores </title>
+</head>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  </body>
+<body>
+    <div class="navbar-fixed">
+        <nav class="teal">
+            <!-- <div class="container"> -->
+            <div class="nav-wrapper">
+                <a href="#!" class="brand-logo center">My Daily Chores</a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger">
+                    <i class="material-icons">menu</i>
+                </a>
+                <ul class="left hide-on-med-and-down">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="parent1.html">Parent 1</a></li>
+                    <li><a href="iconImages.html">Icons</a></li>
+                    <li><a href="child1.html">Child 1</a></li>
+                    <li><a href="child2.html">Child 2</a></li>
+
+                </ul>
+            </div>
+            <!-- </div> -->
+        </nav>
+    </div>
+
+    <ul class="sidenav" id="mobile-demo">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="parent1.html">Parent 1</a></li>
+        <li><a href="iconImages.html">Icons</a></li>
+        <li><a href="child1.html">Child 1</a></li>
+        <li><a href="child2">Child 2</a></li>
+    </ul>
+
+    <section class="section section-icons grey lighten-4 center">
+        <div class="container">
+            <h3 class="teal-text center">Ways to Earn My Rewards</h1>
+        </div>
+    </section>
+    <!-- 3 separate card panels -->
+    <section>
+        <div class="row">
+            <div class="col s12 m4">
+                <div class="card-panel light-blue lighten-2">
+                    <!--row1-->
+                    <div class="row">
+                        <div class="col s12 m4">
+                            <button class="waves-effect waves-light hoverable z-depth-2 ">
+                                <img class="responsive-img" src="assets/css/images/bath_dog.png" alt="bath dog">10</img>
+                            </button>
+                        </div>
+
+                        <div class="col s12 m4">
+                            <button class="waves-effect waves-light hoverable z-depth-2 ">
+                                <img class="responsive-img" src="assets/css/images/do_worbook.png"
+                                    alt="workbook">10</img>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="col s12 m4">
+                        <button class="waves-effect waves-light"><img class="responsive-img" class="icons"
+                                src="assets/css/images/watering.png" alt="watering">10</img>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+            <!--row2-->
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m4">
+                        <button class="waves-effect waves-light hoverable z-depth-2 ">
+                            <img class="responsive-img" src="assets/css/images/pickup_toys (1).png"
+                                alt="pickup toys">10</img>
+                        </button>
+                    </div>
+
+                    <div class="col s12 m4">
+                        <button class="waves-effect waves-light hoverable z-depth-2 ">
+                            <img class="responsive-img" src="assets/css/images/fishbowl.png" alt="fish bowl">10</img>
+                        </button>
+                    </div>
+                    <div class="col s12 m4">
+                        <button class="waves-effect waves-light hoverable z-depth-2 ">
+                            <img class="responsive-img" class="icons" src="assets/css/images/broom.png"
+                                alt="broom">10</img>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--row3-->
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m4">
+                        <button class="waves-effect waves-light hoverable z-depth-2 ">
+                            <img class="responsive-img" src="assets/css/images/folding-clothes.png"
+                                alt="folding clothes">20</img>
+                        </button>
+                    </div>
+
+                    <div class="col s12 m4">
+                        <button class="waves-effect waves-light hoverable z-depth-2 ">
+                            <img class="responsive-img" src="assets/css/images/make_bed.png" alt="make bed">20</img>
+                        </button>
+                    </div>
+                    <div class="col s12 m4">
+                        <button class="waves-effect waves-light hoverable z-depth-2 ">
+                            <img class="responsive-img" src="assets/css/images/reading-book.png"
+                                alt="read book">20</img>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--row4-->
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m4">
+                        <button class="waves-effect waves-light hoverable z-depth-2 ">
+                            <img class="responsive-img" src="assets/css/images/set_table.png" alt="set table">30</img>
+                        </button>
+                    </div>
+                    <div class="col s12 m4">
+                        <button class="waves-effect waves-light hoverable z-depth-2 ">
+                            <img class="responsive-img" src="assets/css/images/table.png" alt="clear table">30</img>
+                        </button>
+                    </div>
+                    <div class="col s12 m4">
+                        <button class="waves-effect waves-light hoverable z-depth-2">
+                            <img class="responsive-img" src="assets/css/images/trash.png" alt="trash">30</img>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--row5-->
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m4">
+                        <button class="waves-effect waves-light hoverable z-depth-2">
+                            <img class="responsive-img" src="assets/css/images/vacuum.png" alt="vacuum">40</img>
+                        </button>
+                    </div>
+                    <div class="col s12 m4">
+                        <button class="waves-effect waves-light hoverable z-depth-2">
+                            <img class="responsive-img" src="assets/css/images/walk_dog.png" alt="walk dog">40</img>
+                        </button>
+                    </div>
+
+                    <div class="col s12 m4">
+                        <button class="waves-effect waves-light hoverable z-depth-2">
+                            <img class="materialboxed responsive-img" class="icons"
+                                src="assets/css/images/wash_dish.png" alt="wash dish">40</img>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- </div>
+        </div> -->
+            <!--2nd Column-->
+            <div class="col s12 m4">
+                <div class="card-panel light-blue lighten-2">
+                    <h2>Chores To Do</h2>
+                    <p>icons will appear here with option to remove. A parent will approve the chores after completion
+                        and click the done button.</p>
+                    <div class="container">
+                        <div class="row">
+
+
+
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+
+
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--3rd column-->
+            <div class="col s12 m4">
+                <div class="card-panel light-blue lighten-2">
+                    <h4>Awesome Job {name} !</h4>
+                    <h6>You've Earned { } Points!</h6>
+
+                    <p>This section will show points earned, used up, and left over.</p>
+                    <h6>Click on the button below to choose your reward!</h6>
+                    <div class="container">
+                        <div class="row">
+
+
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col s12 m4">
+
+
+                            </div>
+                        </div>
+
+                        <div class="container">
+                            <div class="row">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                </sectionclass="card-panel light-blue lighten-2">
+
+
+                <!-- 
+
+    
+    <div class="rewards">
+        <button  class="waves-effect waves-light "><img class="responsive-img" class="icons"
+                src="assets/css/images/salary (1).png" alt="cash">18</img></button>
+        <button  class="waves-effect waves-light "><img class="responsive-img" class="icons"
+                src="assets/css/images/computer.png" alt="screen">19</img></button>
+        <button  class="waves-effect waves-light "><img class="responsive-img" class="icons"
+                src="assets/css/images/cinema.png" alt="movie">21</img></button>
+        <button  class="waves-effect waves-light "><img class="responsive-img" class="icons"
+                src="assets/css/images/family.png" alt="familytime">22</img></button>
+    </div>
+
+    <br>
+
+    <div class="extras">
+
+        <button  class="waves-effect waves-light "><img class="responsive-img" class="icons"
+                src="assets/css/images/check.png" alt="checkmark">20</img></button>
+        <button  class="waves-effect waves-light "><img class="responsive-img" class="icons"
+                src="assets/css/images/ribbon.png" alt="ribbon">17</img></button>
+    </div> -->
+
+
+
+
+
+                <!--JavaScript at end of body for optimized loading-->
+                <script type="text/javascript" src="js/materialize.min.js"></script>
+                <!-- Compiled and minified JavaScript -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+                <!-- Compiled and minified JavaScript -->
+                <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+                    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+                <script>
+                    //side nav
+                    const sideNav = document.querySelector(".sidenav");
+                    M.Sidenav.init(sideNav, {});
+                </script>
+
+</body>
+
 </html>
