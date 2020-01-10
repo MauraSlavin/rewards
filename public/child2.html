@@ -13,34 +13,47 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="style.css">
-    
-    <title> Child 2 Chores </title>
+
+    <title> Parent1 Authentication </title>
 </head>
 
 <body>
-
-
     <div class="navbar-fixed">
-        <nav class="teal">
-            <!-- <div class="container"> -->
-                <div class="nav-wrapper">
-                    <a href="#!" class="brand-logo center">My Daily Chores</a>
-                    <a href="#" data-target="mobile-demo" class="sidenav-trigger">
-                        <i class="material-icons">menu</i>
-                    </a>
-                    <ul class="left hide-on-med-and-down">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="parent1.html">Parent 1</a></li>
-                        <li><a href="parent2.html">Parent 2</a></li>
-                        <li><a href="child1.html">Child 1</a></li>
-                        <li><a href="child2.html">Child 2</a></li>
-                        <li><a href="rewards.html">Rewards</a></li>
-                    </ul>
-                </div>
-            <!-- </div> -->
+        <nav>
+            <div class="nav-wrapper teal">
+                <a href="#!" class="brand-logo center">Rewards</a>
+                
+                <!--dropdown-->
+                <ul id="dropdown1" class="dropdown-content">
+                    <li><a href="parent1.html">Parent 1</a></li>
+                    <li><a href="parent2.html">parent2</a></li>
+                    <li class="divider"></li>
+                    <li><a href="child1.html">Child 1</a></li>
+                    <li><a href="child2.html">Child 2</a></li>
+                    <li class="divider"></li>
+                    <li><a href="rewards.html">Rewards</a></li>
+                    <li><a href="iconLibrary.html">Icons</a></li>
+                </ul>
+
+                        <!--Mobile nav menu-->
+                        <a href="#" data-target="mobile-demo" class="sidenav-trigger">
+                            <i class="material-icons">menu</i>
+                        </a>
+                        
+                        <ul class="left hide-on-med-and-down">
+                            <li><a href="index.html">Home</a></li>
+                        <!-- Dropdown Trigger -->
+                            <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown
+                                    <i class="material-icons right">arrow_drop_down</i>
+                                </a>
+                            </li>
+                        </ul>
+                    
+            </div>
         </nav>
     </div>
 
+    <!--mobile menu-->
     <ul class="sidenav" id="mobile-demo">
         <li><a href="index.html">Home</a></li>
         <li><a href="parent1.html">Parent 1</a></li>
@@ -242,6 +255,10 @@
         //side nav
         const sideNav = document.querySelector(".sidenav");
         M.Sidenav.init(sideNav, {});
+
+        //drop down
+        const dropDown = document.querySelectorAll(".dropdown-trigger");
+        const instanceDropdown = M.Dropdown.init(dropDown, { hover: false });
     </script>
 
 </body>

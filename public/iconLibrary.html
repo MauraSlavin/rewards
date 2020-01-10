@@ -226,26 +226,7 @@
     </section>
 
     
-    <!-- 
-
     
-
-       
-       
-   
-
-    <div class="extras">
-
-        <button  class="waves-effect waves-light "><img class="responsive-img" class="icons"
-                src="assets/css/images/check.png" alt="checkmark">20</img></button>
-        <button  class="waves-effect waves-light "><img class="responsive-img" class="icons"
-                src="assets/css/images/ribbon.png" alt="ribbon">17</img></button>
-    </div> -->
-
-
-
-
-
     <!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="js/materialize.min.js"></script>
     <!-- Compiled and minified JavaScript -->
@@ -257,6 +238,10 @@
         //side nav
         const sideNav = document.querySelector(".sidenav");
         M.Sidenav.init(sideNav, {});
+
+        //drop down
+        const dropDown = document.querySelectorAll(".dropdown-trigger");
+        const instanceDropdown = M.Dropdown.init(dropDown, { hover: false });
     </script>
 
 </body>
