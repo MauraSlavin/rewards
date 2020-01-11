@@ -3,7 +3,7 @@ module.exports = (sequelize) => {
     // only has id (PRIMARY KEY) & 2 foreign keys (below), so nothing needed here.
   });
 
-  UsedPoint.associate = function (models) {
+  UsedPoint.associate = (models) => {
     // We're saying that a UsedPoint should belong to a Child and to a Chore
     UsedPoint.belongsTo(models.Child, {
       foreignKey: {

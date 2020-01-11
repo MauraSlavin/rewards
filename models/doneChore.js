@@ -3,7 +3,7 @@ module.exports = (sequelize) => {
     // only has id (PRIMARY KEY) & 2 foreign keys (below), so nothing needed here.
   });
 
-  DoneChore.associate = function (models) {
+  DoneChore.associate = (models) => {
     // We're saying that a DoneChore should belong to a Child and to a Chore
     DoneChore.belongsTo(models.Child, {
       foreignKey: {
