@@ -82,7 +82,7 @@
             </div>
             <div class="col s12 m4">
                 <div class="card light-blue lighten-2">
-                    <h5 class="black-text center">Done</h5>
+                    <h5 class="black-text center">Scores</h5>
                 </div>
             </div>
         </div>
@@ -253,15 +253,23 @@
 
             <div class="col s12 m4">
                 <div class="card-panel light-blue lighten-2">
-                    <h4 class="text center" style="margin-top: 0px;">Congratulations</h4> 
-                    <h5 class="text center" style="margin-top: 0px;">{name}!</h5>
-                    <h6>You've Earned { } Points!</h6>
-
-                    <p>This section will show points earned, used up, and left over.</p>
-                   
+                    <h4 class="text center" style="margin-top: 0px;">Congratulations</h4>
+                    <h5 class="text center" style="margin-top: 0px; margin-bottom: 30px">{name}</h5>
+                    
+                    <div class="container">
+                        <div class="row">    
+                            <h6><strong>You've earned { } points today!</strong></h6>
+    
+                            <h6><strong>Your total balance is:</strong></h6>
+                        </div>
+                    </div>
+    
                     <div class="container">
                         <div class="row center" style="margin-bottom: 0px;">
-                            <button class="btn btn-large red lighten-2 black-text waves-effect waves-light hoverable z-depth-2"><strong>Collect My Reward!</strong></button>
+                            <button
+                                class="btn btn-large red lighten-2 black-text waves-effect waves-light hoverable z-depth-2" style="margin-top: 30 px;"><strong>Collect
+                                    My Reward!</strong>
+                            </button>
                         </div>
                     </div>
                 </div>
