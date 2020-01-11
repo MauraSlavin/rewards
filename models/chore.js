@@ -13,5 +13,5 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 0,
     },
   });
-  return Chore;
-};
+      return Chore;
+ };
