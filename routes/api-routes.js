@@ -127,6 +127,7 @@ router.put('/children/:id/:chorepoints', (req, res) => {
     //   res.json(dbChild);  // Maura commented
     console.log(dbChild); // Maura  console logged 15 with test data!
     console.log(`The child's points have been incremented by ${req.params.chorepoints}.`);
+    res.send('Your points have been added!');
   });
 });
 
@@ -139,7 +140,7 @@ router.post('/donechores/:childid/:choreid', (req, res) => {
     ChildId: req.params.childid,
     ChoreId: req.params.choreid,
   }).then((dbDone) => {
-    //   res.json(dbDone);  // Maura commented
+    res.json(dbDone); // Maura commented
     console.log(dbDone); // Maura
     console.log(`A record of the done chore with chore id of ${req.params.choreid} has been added.`);
   });
