@@ -12,6 +12,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: 0,
     },
+    iconfile: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'wash_dish.png',
+    },
   });
   return Chore;
 };
