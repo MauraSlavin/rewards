@@ -12,7 +12,7 @@ $(document).ready(() => {
   // **** LOAD PAGE - COLUMN 1
   // Build chore icons with points for "chores" column from chores table
   // Each icon will be clickable
-  loadChoreIcons();
+  // loadChoreIcons();   Maura - uncomment for Sophie before merging!
 
   // This function gets chore icons from the database, and updates the html page
   function loadChoreIcons() {
@@ -30,6 +30,25 @@ $(document).ready(() => {
   //    - one chore per row
   // ("Request Parent Approval" and "Parent Approved" buttons will be there and don't need to be dynamically built)
   // "Request Parent Approval" and "Parent Approved" buttons start out disabled.
+  // passes in the child id.  Only one child, so the id is 1.
+  loadAssignedChoreIcons(1);
+  //  disableButtons();
+
+
+  // This function gets assigned chore icons from the database, and updates the html page
+  function loadAssignedChoreIcons(childId) {
+    console.log('In load-assigned-chore-icons');
+    $.get(`api/assignedchores/${childId}`, (assignedChores) => {
+      console.log('Assigned Chores:');
+      console.log(assignedChores);
+// 
+    }).catch((err) => {
+      console.log(err);
+    });
+  } // endof loadAssignedChoreIcons function
+
+
+
 
   // **** LOAD PAGE - COLUMN 3
   // This column is mostly static.
