@@ -6,7 +6,6 @@ $(document).ready(() => {
   // Get parent name
   // NOT DONE YET...
 
-
   // **** LOAD PAGE - COLUMN 3
   // This column is mostly static.
   // The points earned should start at 0.
@@ -20,10 +19,7 @@ $(document).ready(() => {
   //       and with "remove" button
   //   Write record to assignedChores with current childid and chore chosen
 
-  // **** LISTENING - COLUMN 2
-  // Listen for click on any CHECKMARK
-  //    When first is clicked, enable "Request Parent Approval" button
-  //    Keep track of which Chores are clicked.
+  // **** LISTENING - COLUMN 2 ----
 
   // Listen for click on any REMOVE
   //    When clicked,
@@ -41,6 +37,7 @@ $(document).ready(() => {
   //      A record is inserted in the doneChores table for each chore done
   //      The corresponding record is deleted from the assignedChores table
   //      The chores chosen disappear from the "To Do" list
+
   //      The points for the child in the children table is increased by the points earned.
   //      "You have earned ?? points." is updated in column 3.
   //      "Your total balance is ??." is updated in column 3.
@@ -108,28 +105,24 @@ $(document).ready(() => {
     //  iconEl, checkEl, removeEl are the html elements for the icon, check button and remove button
     let begIconEl = ''; // beginning of icon element
     let iconEl = '';
+    let begChkEl = ''; // begining of checkmare is always the same.
     let checkEl = '';
+    let begRemEl = ''; // beginning of remove is always the same, too.
     let removeEl = '';
 
-    // begining of icon element is always the same.
-    begIconEl = '<div class="col s4 left iconbutton"> ';
-    begIconEl
-      += '<button class="waves-effect waves-light hoverable z-depth-2"> ';
-    begIconEl += '<img class="responsive-img" ';
+    // beginning of icon element is always the same.
+    begIconEl = '<div class="col s4 left iconbutton"> '; // start div for column with this icon button
+    begIconEl += '<button class="waves-effect waves-light hoverable z-depth-2 '; // most of button tag
 
-    // check mark button
-    checkEl = '<div class="col s4 left iconbutton"> ';
-    checkEl
-      += '<button class="waves-effect waves-light hoverable z-depth-2" > ';
-    checkEl
-      += '<img class="responsive-img" src="assets/css/images/check.png" alt="checkmark"></img></button></div>';
+    // beginning of check mark button
+    begChkEl = '<div class="col s4 left iconbutton"> '; // start div for column with this checkmark button
+    begChkEl
+      += '<button class="waves-effect waves-light hoverable z-depth-2 checkbutton '; // most of checkmark button tag
 
-    // remove button
-    removeEl = '<div class="col s4 left iconbutton"> ';
-    removeEl
-      += '<button class="waves-effect waves-light red hoverable z-depth-2" > ';
-    removeEl
-      += '<img class="responsive-img" src="assets/css/images/remove.png" alt="remove"></img></button></div>';
+    // beginning of remove button
+    begRemEl = '<div class="col s4 left iconbutton"> '; // start div for column with this remove button
+    begRemEl
+      += '<button class="waves-effect waves-light red hoverable z-depth-2 '; // most of remove button tag
 
     $.get(`api/assignedchores/${childId}`, (assignedChores) => {
       //  For each assignedChore, build an html row with the icon (w/title & points), check & remove buttons
@@ -137,17 +130,47 @@ $(document).ready(() => {
         // add assigned chores icon
 
         // customize the image part of the icon element w/image, title and points; and append
-        iconEl = `${begIconEl} src="assets/css/images/${chore.Chore.iconfile}" alt="${chore.Chore.title}">${chore.Chore.title} - ${chore.Chore.points}</img></button></div>`;
+        iconEl = begIconEl; // beginning
+        iconEl += `data-id=${chore.ChoreId}"> `; // data id with chore id so we know what was clicked
+        iconEl += '<img class="responsive-img" '; // start image tag w/class
+        iconEl += `src="assets/css/images/${chore.Chore.iconfile}" `; // source for image
+        iconEl += `alt="${chore.Chore.title}"> `; // alt for image
+        iconEl += `${chore.Chore.title} - ${chore.Chore.points}</img></button></div>`; // text for image, and end tags
         $('.column2icons').append(iconEl);
 
         // add checkmark button
+        checkEl = begChkEl; // beginning
+        checkEl += `data-id=${chore.ChoreId}"> `; // data id with chore id so we know what was clicked
+        checkEl += '<img class="responsive-img" '; // start image tag with class
+        checkEl += 'src="assets/css/images/check.png" '; // source for image
+        checkEl += 'alt="checkmark">'; // alt for image
+        checkEl += '</img></button></div>'; // end tags
+        console.log(checkEl);
         $('.column2icons').append(checkEl);
 
         // add remove button
+        removeEl = begRemEl; // beginning
+        removeEl += `data-id=${chore.ChoreId}"> `; // data id with chore id so we know what was clicked
+        removeEl += '<img class="responsive-img" '; // start image tag with class
+        removeEl += 'src="assets/css/images/remove.png" '; // source for image
+        removeEl += 'alt="remove"></img></button></div>'; // alt for image & end tags
         $('.column2icons').append(removeEl);
       });
     }).catch((err) => {
       console.log(err);
     });
   } // endof loadAssignedChoreIcons function
-}); // end of $(document).ready
+
+  // **** LISTENING - COLUMN 2 ----
+  // Listen for click on any CHECKMARK
+  //    When first is clicked, enable "Request Parent Approval" button
+  //    Keep track of which Chores are clicked.
+  // $('.checkbutton').on('click', function (event) {
+  //   const id = $(this).data('id');
+
+  //   // make it devoured (eaten)
+  //   const devouredTrue = {
+  //     devoured: true,
+  //   };
+  // }); // end of $('.checkbutton')
+}); // end of module ($(document).ready)
