@@ -12,7 +12,7 @@ $(document).ready(() => {
   // **** LOAD PAGE - COLUMN 1
   // Build chore icons with points for "chores" column from chores table
   // Each icon will be clickable
-  loadChoreIcons();
+  // loadChoreIcons();   Maura - uncomment for Sophie before merging!
 
   // This function gets chore icons from the database, and updates the html page
   function loadChoreIcons() {
@@ -30,6 +30,55 @@ $(document).ready(() => {
   //    - one chore per row
   // ("Request Parent Approval" and "Parent Approved" buttons will be there and don't need to be dynamically built)
   // "Request Parent Approval" and "Parent Approved" buttons start out disabled.
+  // passes in the child id.  Only one child, so the id is 1.
+  loadAssignedChoreIcons(1);
+  //  disableButtons();
+
+
+  // This function gets assigned chore icons from the database, and updates the html page
+  function loadAssignedChoreIcons(childId) {
+    //  iconEl, checkEl, removeEl are the html elements for the icon, check button and remove button
+    let begIconEl = ''; // beginning of icon element
+    let iconEl = '';
+    let checkEl = '';
+    let removeEl = '';
+
+    // begining of icon element is always the same.
+    begIconEl = '<div class="col s4 left iconbutton"> ';
+    begIconEl += '<button class="waves-effect waves-light hoverable z-depth-2"> ';
+    begIconEl += '<img class="responsive-img" ';
+
+    // check mark button
+    checkEl = '<div class="col s4 left iconbutton"> ';
+    checkEl += '<button class="waves-effect waves-light hoverable z-depth-2" > ';
+    checkEl += '<img class="responsive-img" src="assets/css/images/check.png" alt="checkmark"></img></button></div>';
+
+    // remove button
+    removeEl = '<div class="col s4 left iconbutton"> ';
+    removeEl += '<button class="waves-effect waves-light red hoverable z-depth-2" > ';
+    removeEl += '<img class="responsive-img" src="assets/css/images/remove.png" alt="remove"></img></button></div>';
+
+    $.get(`api/assignedchores/${childId}`, (assignedChores) => {
+      //  For each assignedChore, build an html row with the icon (w/title & points), check & remove buttons
+      assignedChores.forEach((chore) => {
+        // add assigned chores icon
+
+        // customize the image part of the icon element w/image, title and points; and append
+        iconEl = `${begIconEl} src="assets/css/images/${chore.Chore.iconfile}" alt="${chore.Chore.title}">${chore.Chore.title} - ${chore.Chore.points}</img></button></div>`;
+        $('.column2icons').append(iconEl);
+
+        // add checkmark button
+        $('.column2icons').append(checkEl);
+
+        // add remove button
+        $('.column2icons').append(removeEl);
+
+      });
+    }).catch((err) => {
+      console.log(err);
+    });
+  } // endof loadAssignedChoreIcons function
+
 
   // **** LOAD PAGE - COLUMN 3
   // This column is mostly static.
