@@ -38,7 +38,7 @@ router.get('/assignedchores/:id', (req, res) => {
     },
     include: [db.Chore],
   }).then((dbChore) => {
-    //   res.json(dbChore);  // Maura commented
+    res.json(dbChore);   // Maura added
     console.log('Chores assigned:');
     dbChore.forEach((assignedchore) => {
       console.log(assignedchore.Chore.title);
