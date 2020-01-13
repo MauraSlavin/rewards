@@ -11,7 +11,9 @@ INSERT INTO parents (id, name, email) VALUES (1, 'Andrew', 'Andy@gmail.com');
 -- only one child for first iteration.  DB is built to accommodate multiple children in future releases.
 DELETE FROM children;
 -- in these seeds, Sophia did 220 worth of chores, and spent 175 chores for a balance of 45 point.
-INSERT INTO children (id, name, email, points) VALUES (1, 'Sophia', 'S@gmail.com', 45);
+INSERT INTO children (id, name, email, points) VALUES 
+	(1, 'Sophia', 'S@gmail.com', 45), 
+	(2, 'Giselle', 'Gis@gmail.com', 0);   -- just for testing
  
 
 -- Put a few chores in the db
