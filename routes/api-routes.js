@@ -6,11 +6,10 @@ router.get('/chores', (req, res) => {
   console.log(`This is the request ${req}`);
   console.log(`This is the response ${res}`);
   db.Chore.findAll({}).then((dbChore) => {
-    //   res.json(dbChore);  // Maura commented
     res.json(dbChore);
-    dbChore.forEach((chore) => {
-      console.log(`Chore: ${chore.title} for ${chore.points}.`);
-    });
+    // dbChore.forEach((chore) => { // Maura commented out
+    //   console.log(`Chore: ${chore.title} for ${chore.points}.`);
+    // });
   });
 });
 
@@ -39,10 +38,9 @@ router.get('/assignedchores/:id', (req, res) => {
     include: [db.Chore],
   }).then((dbChore) => {
     res.json(dbChore); // Maura added
-    console.log('Chores assigned:');
-    dbChore.forEach((assignedchore) => {
-      console.log(assignedchore.Chore.title);
-    });
+    // dbChore.forEach((assignedchore) => { // Maura commented out
+    //   console.log(assignedchore.Chore.title);
+    // });
   });
 });
 
@@ -65,8 +63,6 @@ router.get('/children', (req, res) => {
   console.log(`This is the request ${req}`);
   console.log(`This is the response ${res}`);
   db.Child.findAll({}).then((dbChild) => {
-    console.log('children:'); // Maura for testing
-    console.log(dbChild);
     res.json(dbChild);
   });
 });
@@ -218,14 +214,12 @@ router.get('/parents/:id', (req, res) => {
   // We set the value to an array of the models we want to include in a left outer join
   // In this case, just db.Post
   console.log(`This is the response ${res}`);
-  db.Parent.findOne({
+  db.Parent.findAll({
     where: {
-      id: req.params.id,
+      ChildId: req.params.id,
     },
   }).then((dbParent) => {
-    //   res.json(dbParent);  // Maura commented
-    console.log(dbParent.email); // Maura  returned Andy@gmail.com!!
-    console.log(dbParent.alt_email);
+    res.json(dbParent); // Parent(s) names & emails
   });
 });
 

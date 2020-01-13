@@ -1,6 +1,5 @@
 .iconbutton {
     margin-bottom: 20px;
-    height: 140px;
 }
 
 .icon {
@@ -9,4 +8,9 @@
 
 .smallicon {
     width: 40px;
+}
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
 }

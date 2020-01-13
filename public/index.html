@@ -22,13 +22,14 @@
         <nav>
             <div class="nav-wrapper teal">
                 <a href="#!" class="brand-logo center">Rewards</a>
-                <a href="#!" class="name right" style="margin-right: 85px;">Hello <span class="amber-text text-accent-4 greetname"
-                        style="font-size: 20px;" id="child2"></span></a>
+                <a href="#!" class="name right" style="margin-right: 85px;">Hello <span
+                        class="amber-text text-accent-4 greetname" style="font-size: 20px;" id="child2"></span></a>
 
                 <!--dropdown-->
                 <ul id="dropdown1" class="dropdown-content">
-                    <li><a href="parent1.html">Parent 1</a></li>
-                    <li><a href="parent2.html">parent2</a></li>
+                    <div class="parentlinks"></div>
+                    <!-- <li><a href="parent1.html">Parent 1</a></li>
+                    <li><a href="parent2.html">parent2</a></li> -->
                     <li class="divider"></li>
                     <div class="childlinks"></div>
                     <!-- <li><a href="index.html">Child 1</a></li>
@@ -56,13 +57,16 @@
         </nav>
     </div>
 
+
     <!--mobile menu-->
     <ul class="sidenav" id="mobile-demo">
         <li><a href="home.html">Home</a></li>
-        <li><a href="parent1.html">Parent 1</a></li>
-        <li><a href="parent2.html">Parent 2</a></li>
-        <li><a href="index.html">Child 1</a></li>
-        <li><a href="child2.html">Child 2</a></li>
+        <div class="parentlinks"></div>
+        <!-- <li><a href="parent1.html">Parent 1</a></li> -->
+        <!-- <li><a href="parent2.html">Parent 2</a></li> -->
+        <div class="childlinks"></div>
+        <!-- <li><a href="index.html">Child 1</a></li> -->
+        <!-- <li><a href="child2.html">Child 2</a></li> -->
         <li><a href="rewards.html">Rewards</a></li>
     </ul>
 
@@ -202,7 +206,12 @@
 
         <div class="col s12 m4">
             <div class="card-panel light-blue lighten-2">
-                <div class="column2icons"></div> <!-- append assigned chore icons here -->
+                <!-- icons is used for formatting; column2icons is used to append icons -->
+                <!-- icons may be used other places, column2icons may not! -->
+
+                <div class="icons column2icons">
+                    <!-- append assigned chore icons here -->
+                </div>
 
                 <div class="row center" style="margin-bottom: 0px;">
                     <button class="btn btn-large green black-text waves-effect waves-light hoverable z-depth-2 request">
@@ -215,8 +224,9 @@
                         style="margin-top: 20px">
                         <strong>Approved!</strong>
                     </button>
-                </div>
+                </div> <!-- end of row -->
             </div> <!-- ends card -->
+
         </div> <!-- ends second column -->
 
 

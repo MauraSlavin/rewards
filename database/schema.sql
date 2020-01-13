@@ -3,17 +3,6 @@ CREATE DATABASE rewards_db;
 
 USE rewards_db;
 
--- parent table
-DROP TABLE IF EXISTS parents;
-CREATE TABLE parents (
-	id INTEGER AUTO_INCREMENT PRIMARY KEY,
-	name VARCHAR(255) NOT NULL,
-	email VARCHAR(255) NOT NULL,
-	alt_email VARCHAR(255),
-    createdAt DATETIME DEFAULT current_timestamp,
-    updatedAt DATETIME DEFAULT current_timestamp
-	);
-
 
 -- child table
 DROP TABLE IF EXISTS children;
@@ -24,6 +13,21 @@ CREATE TABLE children (
 	points INTEGER DEFAULT 0,
     createdAt DATETIME DEFAULT current_timestamp,
     updatedAt DATETIME DEFAULT current_timestamp
+	);
+    
+    
+-- parent table
+DROP TABLE IF EXISTS parents;
+CREATE TABLE parents (
+	id INTEGER AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(255) NOT NULL,
+	email VARCHAR(255) NOT NULL,
+	alt_email VARCHAR(255),
+    ChildId INTEGER,
+    createdAt DATETIME DEFAULT current_timestamp,
+    updatedAt DATETIME DEFAULT current_timestamp,
+    	FOREIGN KEY (ChildID)
+		REFERENCES children(id)
 	);
 
 

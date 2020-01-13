@@ -5,7 +5,9 @@
 
 -- only uses one parent.  Needed for email address (and alt_email, if we get to that)
 DELETE FROM parents;
-INSERT INTO parents (id, name, email) VALUES (1, 'Andrew', 'Andy@gmail.com');
+INSERT INTO parents (id, name, email, ChildId) VALUES 
+	(1, 'Andrew', 'Andy@gmail.com', 1)
+    (2, 'FunMom', 'mama@gmail.com', 1);
 
 
 -- only one child for first iteration.  DB is built to accommodate multiple children in future releases.

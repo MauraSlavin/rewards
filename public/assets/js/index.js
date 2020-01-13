@@ -2,10 +2,6 @@
 $(document).ready(() => {
   // These need to be done...
 
-  // Populate dropdown list with parent name from database
-  // Get parent name
-  // NOT DONE YET...
-
   // **** LOAD PAGE - COLUMN 3
   // This column is mostly static.
   // The points earned should start at 0.
@@ -48,32 +44,20 @@ $(document).ready(() => {
   // Re-direct the user to the Rewards page.
 
   // (started - Sophie is working on...)
-  // Build chore icons with points for "chores" column from chores table
-  // Each icon will be clickable
-  loadChoreIcons();
-
+  // This is called near the bottom of the file...
   // This function gets chore icons from the database, and updates the html page
   function loadChoreIcons() {
     $.get('api/chores', (chores) => {
-      console.log('Chores:');
-      console.log(chores);
-      // const chores = data;
-      //   initializeChores(chores);
+      // console.log("Chores:");
+      // console.log(chores);
     });
   } // endof loadChoreIcons function
-
-  // Greet the child by name on the right side of the nav bar
-  // Only one child, so we know it is id 1
-  greetChild(1);
 
   function greetChild(childId) {
     $.get(`api/children/${childId}`, (child) => {
       $('.greetname').text(child.name);
     });
   }
-
-  // Populate dropdown list with child name from database
-  loadChildrenNames();
 
   // This function gets children's names from the database,
   // and uses them for the dropdown list on the nav bar
@@ -90,6 +74,119 @@ $(document).ready(() => {
     });
   } // endof loadChildrenNames function
 
+  // This function gets parents's names from the database,
+  // and uses them for the dropdown list on the nav bar
+  function loadParentNames(childId) {
+    // Get the parents' names (the emails are available here, too)
+    $.get(`api/parents/${childId}`, (parents) => {
+      let parentLink = ''; // will be used for the html for the link
+      // for each parent, add a link to the dropdown list in the nav bar
+      parents.forEach((parent) => {
+        parentLink = `<li><a href="parent1.html">${parent.name}</a></li>`;
+        $('.parentlinks').append(parentLink);
+      });
+    });
+  } // endof loadChildrenNames function
+
+  // This function gets assigned chore icons from the database, and updates the html page
+  function loadAssignedChoreIcons(childId) {
+    //  iconEl, checkEl, removeEl are the html elements for the icon, check button and remove button
+    let rowEl = ''; // the whole thing goes in a row for each icon
+    let begIconEl = ''; // beginning of icon element
+    let iconEl = '';
+    let begChkEl = ''; // begining of checkmare is always the same.
+    let checkEl = '';
+    let begRemEl = ''; // beginning of remove is always the same, too.
+    let removeEl = '';
+
+    // beginning of icon element is always the same.
+    begIconEl = '<div class="col s4 left iconbutton"> '; // start div for column with this icon button
+    begIconEl
+      += '<button class="waves-effect waves-light hoverable z-depth-2 iconclass" '; // most of button tag
+
+    // beginning of check mark button
+    begChkEl = '<div class="col s4 left iconbutton"> '; // start div for column with this checkmark button
+    begChkEl
+      += '<button class="waves-effect waves-light hoverable z-depth-2 checkbutton" '; // most of checkmark button tag
+
+    // beginning of remove button
+    begRemEl = '<div class="col s4 left iconbutton"> '; // start div for column with this remove button
+    begRemEl
+      += '<button class="waves-effect waves-light red hoverable z-depth-2 removebutton" '; // most of remove button tag
+
+    $.get(`api/assignedchores/${childId}`, (assignedChores) => {
+      //  For each assignedChore, build an html row with the icon (w/title & points),
+      //     check & remove buttons
+      assignedChores.forEach((chore) => {
+        // add assigned chores icon
+
+        // begin row;  flex keeps things lined up nicely
+        rowEl = '<div class="row flex">';
+
+        // customize the image part of the icon element w/image, title and points; and append
+        iconEl = begIconEl; // beginning
+        iconEl += `data-id="${chore.ChoreId}"> `; // data id with chore id so we know what was clicked
+        iconEl += '<img class="responsive-img" '; // start image tag w/class
+        iconEl += `src="assets/css/images/${chore.Chore.iconfile}" `; // source for image
+        iconEl += `alt="${chore.Chore.title}">`; // alt for image
+        iconEl += `${chore.Chore.title} - ${chore.Chore.points}`; // text for image
+        iconEl += '</img></button></div>'; // and end tags
+        // put icon in row
+        rowEl += iconEl;
+
+        // add checkmark button
+        checkEl = begChkEl; // beginning
+        checkEl += `data-id="${chore.ChoreId}"> `; // data id with chore id so we know what was clicked
+        checkEl += '<img class="responsive-img" '; // start image tag with class
+        checkEl += 'src="assets/css/images/check.png" '; // source for image
+        checkEl += 'alt="checkmark">'; // alt for image
+        checkEl += '</img></button></div>'; // end tags
+        console.log(checkEl);
+        // put checkmark in row
+        rowEl += checkEl;
+
+        // add remove button
+        removeEl = begRemEl; // beginning
+        removeEl += `data-id="${chore.ChoreId}"> `; // data id with chore id so we know what was clicked
+        removeEl += '<img class="responsive-img" '; // start image tag with class
+        removeEl += 'src="assets/css/images/remove.png" '; // source for image
+        removeEl += 'alt="remove">'; // alt for image
+        removeEl += '</img></button></div>'; // end tags
+        // put remove icon in row
+        rowEl += removeEl;
+
+        // end row
+        rowEl += "</div>";
+
+        // append row to html file in column 2
+        $('.column2icons').append(rowEl);
+      });
+    }).catch((err) => {
+      console.log(err);
+    });
+  } // endof loadAssignedChoreIcons function
+
+  function getid(obj) {
+    const id = $(obj).data('id');
+    console.log(`ID in getid:${id}`);
+  }
+
+  // Greet the child by name on the right side of the nav bar
+  // Only one child, so we know it is id 1
+  greetChild(1);
+
+  // (started - Sophie is working on...)
+  // Build chore icons with points for "chores" column from chores table
+  // Each icon will be clickable
+  loadChoreIcons();
+
+  // Populate dropdown list with child name from database
+  loadChildrenNames();
+
+  // Populate dropdown list with parent name from database
+  // Can pass in childId 1 since there's only one child
+  loadParentNames(1);
+
   // **** LOAD PAGE - COLUMN 2
   // Build assigned chores with clickable checkmark and remove button
   //    - one chore per row
@@ -100,77 +197,40 @@ $(document).ready(() => {
   $('.request').attr('disabled', true);
   $('.approve').attr('disabled', true);
 
-  // This function gets assigned chore icons from the database, and updates the html page
-  function loadAssignedChoreIcons(childId) {
-    //  iconEl, checkEl, removeEl are the html elements for the icon, check button and remove button
-    let begIconEl = ''; // beginning of icon element
-    let iconEl = '';
-    let begChkEl = ''; // begining of checkmare is always the same.
-    let checkEl = '';
-    let begRemEl = ''; // beginning of remove is always the same, too.
-    let removeEl = '';
-
-    // beginning of icon element is always the same.
-    begIconEl = '<div class="col s4 left iconbutton"> '; // start div for column with this icon button
-    begIconEl += '<button class="waves-effect waves-light hoverable z-depth-2 '; // most of button tag
-
-    // beginning of check mark button
-    begChkEl = '<div class="col s4 left iconbutton"> '; // start div for column with this checkmark button
-    begChkEl
-      += '<button class="waves-effect waves-light hoverable z-depth-2 checkbutton '; // most of checkmark button tag
-
-    // beginning of remove button
-    begRemEl = '<div class="col s4 left iconbutton"> '; // start div for column with this remove button
-    begRemEl
-      += '<button class="waves-effect waves-light red hoverable z-depth-2 '; // most of remove button tag
-
-    $.get(`api/assignedchores/${childId}`, (assignedChores) => {
-      //  For each assignedChore, build an html row with the icon (w/title & points), check & remove buttons
-      assignedChores.forEach((chore) => {
-        // add assigned chores icon
-
-        // customize the image part of the icon element w/image, title and points; and append
-        iconEl = begIconEl; // beginning
-        iconEl += `data-id=${chore.ChoreId}"> `; // data id with chore id so we know what was clicked
-        iconEl += '<img class="responsive-img" '; // start image tag w/class
-        iconEl += `src="assets/css/images/${chore.Chore.iconfile}" `; // source for image
-        iconEl += `alt="${chore.Chore.title}"> `; // alt for image
-        iconEl += `${chore.Chore.title} - ${chore.Chore.points}</img></button></div>`; // text for image, and end tags
-        $('.column2icons').append(iconEl);
-
-        // add checkmark button
-        checkEl = begChkEl; // beginning
-        checkEl += `data-id=${chore.ChoreId}"> `; // data id with chore id so we know what was clicked
-        checkEl += '<img class="responsive-img" '; // start image tag with class
-        checkEl += 'src="assets/css/images/check.png" '; // source for image
-        checkEl += 'alt="checkmark">'; // alt for image
-        checkEl += '</img></button></div>'; // end tags
-        console.log(checkEl);
-        $('.column2icons').append(checkEl);
-
-        // add remove button
-        removeEl = begRemEl; // beginning
-        removeEl += `data-id=${chore.ChoreId}"> `; // data id with chore id so we know what was clicked
-        removeEl += '<img class="responsive-img" '; // start image tag with class
-        removeEl += 'src="assets/css/images/remove.png" '; // source for image
-        removeEl += 'alt="remove"></img></button></div>'; // alt for image & end tags
-        $('.column2icons').append(removeEl);
-      });
-    }).catch((err) => {
-      console.log(err);
-    });
-  } // endof loadAssignedChoreIcons function
-
   // **** LISTENING - COLUMN 2 ----
-  // Listen for click on any CHECKMARK
+  // Listen for click on any CHECKMARK  (Maura was working on)
   //    When first is clicked, enable "Request Parent Approval" button
   //    Keep track of which Chores are clicked.
-  // $('.checkbutton').on('click', function (event) {
-  //   const id = $(this).data('id');
 
-  //   // make it devoured (eaten)
-  //   const devouredTrue = {
-  //     devoured: true,
-  //   };
-  // }); // end of $('.checkbutton')
-}); // end of module ($(document).ready)
+  // $('.checkbutton').on('click', (event) => {
+  //   console.log('Checkbutton clicked.');
+  //   // const id = $(this).data('id');
+  //   const id = $('.checkbutton').data('id');
+  //   console.log(`Id clicked: ${id}`);
+  // });
+
+  // $(() => {
+  //   $('.checkbutton').on('click', function (event) {
+  //     const id = $(this).data('id');
+  //     console.log(`ID: ${id}`);
+  //   });
+  // });
+
+  // $('.checkbutton').on('click', function() {
+  //   var id = $(this).data('id');
+  //   console.log("ID: " + id);
+  // });
+
+  // $("body").on("click", "button.checkbutton", (event) => {
+  //   console.log("Checkbutton clicked.");
+  //   // const id = $(this).data('id');
+  //   const id = $(this).data("id");
+  //   console.log(`Id clicked: ${id}`);
+  // });
+
+  // $('.column2icons').on('click', function (event) {
+  //   console.log('Checkbutton clicked.');
+  //   const id = $('.checkbutton').data('id');
+  //   console.log(`Id clicked: ${id}`);
+  // });
+}); // end of $(document).ready
