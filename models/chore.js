@@ -18,5 +18,5 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 'wash_dish.png',
     },
   });
-      return Chore;
- };
+  return Chore;
+};
