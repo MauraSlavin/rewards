@@ -226,7 +226,9 @@ router.get('/children/:id', (req, res) => {
       id: req.params.id,
     },
   }).then((dbChild) => {
-    //   res.json(dbParent);  // Maura commented
+    res.json(dbChild); // Maura uncommented
+    console.log('Child name & email from table:'); // Maura - testing
+    console.log(dbChild.name); // Maura added to get child's name from table
     console.log(dbChild.email); // Maura  returned S@gmail.com!!
   });
 });

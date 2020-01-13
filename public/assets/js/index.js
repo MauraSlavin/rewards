@@ -1,7 +1,5 @@
 // Wait until page is loaded
 $(document).ready(() => {
-// TESTING
-  console.log('Begin index.js on client side.');
   // Populate dropdown list with parent name from database
   // Get parent name
   // NOT DONE YET...
@@ -9,31 +7,45 @@ $(document).ready(() => {
   // Populate dropdown list with child name from database
   // NOT DONE YET...
 
+  // Greet the child by name on the right side of the nav bar
+  // Only one child, so we know it is id 1
+  greetChild(1);
+
+  function greetChild(childId) {
+    $.get(`api/children/${childId}`, (child) => {
+      console.log('Child in client side:');
+      // console.log(child);
+      console.log(child.name);
+      // console.log(child.email);
+      // $('.greetname').text('Soph');
+      $('.greetname').text(child.name);
+     });
+  }
+
   // **** LOAD PAGE - COLUMN 1
   // Build chore icons with points for "chores" column from chores table
   // Each icon will be clickable
-  // loadChoreIcons();   Maura - uncomment for Sophie before merging!
+  loadChoreIcons();
 
   // This function gets chore icons from the database, and updates the html page
   function loadChoreIcons() {
-    // $.get("/api/chores", function(data) {
     $.get('api/chores', (chores) => {
       console.log('Chores:');
       console.log(chores);
       // const chores = data;
-    //   initializeChores(chores);
+      //   initializeChores(chores);
     });
   } // endof loadChoreIcons function
 
   // **** LOAD PAGE - COLUMN 2
   // Build assigned chores with clickable checkmark and remove button
   //    - one chore per row
-  // ("Request Parent Approval" and "Parent Approved" buttons will be there and don't need to be dynamically built)
-  // "Request Parent Approval" and "Parent Approved" buttons start out disabled.
   // passes in the child id.  Only one child, so the id is 1.
   loadAssignedChoreIcons(1);
-  //  disableButtons();
-
+  // ("Request Parent Approval" and "Parent Approved" buttons will be there and don't need to be dynamically built)
+  // "Request Parent Approval" and "Parent Approved" buttons start out disabled.
+  $('.request').attr('disabled', true);
+  $('.approve').attr('disabled', true);
 
   // This function gets assigned chore icons from the database, and updates the html page
   function loadAssignedChoreIcons(childId) {
@@ -45,18 +57,23 @@ $(document).ready(() => {
 
     // begining of icon element is always the same.
     begIconEl = '<div class="col s4 left iconbutton"> ';
-    begIconEl += '<button class="waves-effect waves-light hoverable z-depth-2"> ';
+    begIconEl
+      += '<button class="waves-effect waves-light hoverable z-depth-2"> ';
     begIconEl += '<img class="responsive-img" ';
 
     // check mark button
     checkEl = '<div class="col s4 left iconbutton"> ';
-    checkEl += '<button class="waves-effect waves-light hoverable z-depth-2" > ';
-    checkEl += '<img class="responsive-img" src="assets/css/images/check.png" alt="checkmark"></img></button></div>';
+    checkEl
+      += '<button class="waves-effect waves-light hoverable z-depth-2" > ';
+    checkEl
+      += '<img class="responsive-img" src="assets/css/images/check.png" alt="checkmark"></img></button></div>';
 
     // remove button
     removeEl = '<div class="col s4 left iconbutton"> ';
-    removeEl += '<button class="waves-effect waves-light red hoverable z-depth-2" > ';
-    removeEl += '<img class="responsive-img" src="assets/css/images/remove.png" alt="remove"></img></button></div>';
+    removeEl
+      += '<button class="waves-effect waves-light red hoverable z-depth-2" > ';
+    removeEl
+      += '<img class="responsive-img" src="assets/css/images/remove.png" alt="remove"></img></button></div>';
 
     $.get(`api/assignedchores/${childId}`, (assignedChores) => {
       //  For each assignedChore, build an html row with the icon (w/title & points), check & remove buttons
@@ -72,13 +89,11 @@ $(document).ready(() => {
 
         // add remove button
         $('.column2icons').append(removeEl);
-
       });
     }).catch((err) => {
       console.log(err);
     });
   } // endof loadAssignedChoreIcons function
-
 
   // **** LOAD PAGE - COLUMN 3
   // This column is mostly static.
