@@ -1,12 +1,20 @@
 .iconbutton {
     margin-bottom: 20px;
+}
+
+/* .icon {
+    margin: 0px 10px;
+} */
+
+/* .smallicon {
+    width: 40px;
+} */
+
+.icons {
     height: 140px;
 }
 
-.icon {
-    margin: 0px 10px;
-}
-
-.smallicon {
-    width: 40px;
+.flex {
+    display: flex;
+    flex-wrap: wrap;
 }

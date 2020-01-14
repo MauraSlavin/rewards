@@ -19,5 +19,22 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 0,
     },
   });
+  
+  Child.associate = (models) => {
+    // A child belongs to one or two parents
+    Child.belongsTo(models.Parent, {
+      as: 'Parent1',
+      foreignKey: {
+        allowNull: false,
+      },
+    },
+    Child.belongsTo(models.Parent, {
+      as: 'Parent2',
+      foreignKey: {
+        allowNull:true,
+      }
+    }));
+
+  };
   return Child;
 };

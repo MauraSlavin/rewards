@@ -3,6 +3,7 @@ CREATE DATABASE rewards_db;
 
 USE rewards_db;
 
+
 -- parent table
 DROP TABLE IF EXISTS parents;
 CREATE TABLE parents (
@@ -22,11 +23,17 @@ CREATE TABLE children (
 	name VARCHAR(255) NOT NULL,
 	email VARCHAR(255) NOT NULL,
 	points INTEGER DEFAULT 0,
+	Parent1Id INTEGER NOT NULL,
+	Parent2Id INTEGER,
     createdAt DATETIME DEFAULT current_timestamp,
-    updatedAt DATETIME DEFAULT current_timestamp
+    updatedAt DATETIME DEFAULT current_timestamp,
+	FOREIGN KEY (Parent1Id)
+		REFERENCES parents(id),
+	FOREIGN KEY (Parent2Id)
+		REFERENCES parents(id)
 	);
-
-
+    
+    
 -- chores table
 DROP TABLE IF EXISTS chores;
 CREATE TABLE chores (
@@ -37,6 +44,7 @@ CREATE TABLE chores (
     createdAt DATETIME DEFAULT current_timestamp,
     updatedAt DATETIME DEFAULT current_timestamp
 	);
+
 
 -- rewards table
 DROP TABLE IF EXISTS rewards;

@@ -1,17 +1,22 @@
 -- I'm including inserting the id's, even though technically that's not required by SQL.
 -- but if you don't know what the id is going to be, you risk getting an error when inserting a foreign id,
 -- so I'm inserting id's so I'll know what they are for inserting seed data for testing.
+-- only one child for first iteration.  DB is built to accommodate multiple children in future releases.
 
 
 -- only uses one parent.  Needed for email address (and alt_email, if we get to that)
+-- second parent is for dropdown list, to prep for future enhancements.
 DELETE FROM parents;
-INSERT INTO parents (id, name, email) VALUES (1, 'Andrew', 'Andy@gmail.com');
+INSERT INTO parents (id, name, email) VALUES 
+	(1, 'Andrew', 'Andy@gmail.com'),
+    (2, 'FunMom', 'mama@gmail.com');
 
 
--- only one child for first iteration.  DB is built to accommodate multiple children in future releases.
 DELETE FROM children;
 -- in these seeds, Sophia did 220 worth of chores, and spent 175 chores for a balance of 45 point.
-INSERT INTO children (id, name, email, points) VALUES (1, 'Sophia', 'S@gmail.com', 45);
+INSERT INTO children (id, name, email, points, Parent1Id, Parent2Id) VALUES 
+	(1, 'Sophia', 'S@gmail.com', 45, 1, 2), 
+	(2, 'Lauren', 'Lauren@gmail.com', 0, 1, NULL);   -- just for testing (second parent can be NULL), 0 points
  
 
 -- Put a few chores in the db
