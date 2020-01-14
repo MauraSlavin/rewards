@@ -27,6 +27,14 @@ $(document).ready(() => {
     $(rwdDis).find(button).each(function () {
       console.log(this.id);
       // Now that we have the id we need to make an axios call to our backend
+      axios({
+        method: 'post',
+        url: `/api/usedpoints/1/${this.id}`,
+        responseType: 'text',
+      })
+        .then(function (response) {
+          console.log(response);
+        });
     });
   });
 });
