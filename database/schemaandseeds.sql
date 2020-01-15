@@ -52,7 +52,7 @@ CREATE TABLE rewards (
 	id INTEGER AUTO_INCREMENT PRIMARY KEY,
 	title VARCHAR(255) NOT NULL UNIQUE,
 	points INTEGER NOT NULL,
-	iconfile VARCHAR(255) DEFAULT 'reading-book.png',
+	iconfile VARCHAR(255) DEFAULT 'salary (1).png',
     createdAt DATETIME DEFAULT current_timestamp,
     updatedAt DATETIME DEFAULT current_timestamp
 	);

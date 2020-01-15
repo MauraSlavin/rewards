@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 /* eslint-disable no-undef */
 /* eslint-disable max-len */
+=======
+/* eslint-disable max-len */
+/* eslint-disable no-undef */
+>>>>>>> fce4c90850710d78a95c474e24b74a01e57ac50b
 /* eslint-disable no-unused-vars */
 
 // Wait until page is loaded
@@ -139,21 +144,29 @@ $(document).ready(() => {
     begChkEl = '<div class="col s4 left iconbutton"> '; // start div for column with this checkmark button
     begChkEl
       += '<button class="waves-effect waves-light hoverable z-depth-2 checkbutton" '; // most of checkmark button tag
-    chkImg = '<img class="responsive-img" '; // start image tag with class
-    chkImg += 'src="assets/css/images/check.png" '; // source for image
-    chkImg += 'alt="checkmark">'; // alt for image
 
     // beginning of remove button
     begRemEl = '<div class="col s4 left iconbutton"> '; // start div for column with this remove button
     begRemEl
       += '<button class="waves-effect waves-light red hoverable z-depth-2 removebutton" '; // most of remove button tag
+
+    // checkmark image  
+    chkImg = '<img class="responsive-img" '; // start image tag with class
+    chkImg += 'src="assets/css/images/check.png" '; // source for image
+    chkImg += 'alt="checkmark">'; // alt for image
+    
     remImg = '<img class="responsive-img" '; // start image tag with class
     remImg += 'src="assets/css/images/remove.png" '; // source for image
     remImg += 'alt="remove">'; // alt for image
 
     $.get(`api/assignedchores/${childId}`, (assignedChores) => {
+<<<<<<< HEAD
       //  For each assignedChore, build an html row with the icon (w/title & points),
       //     check & remove buttons
+=======
+      // eslint-disable-next-line max-len
+      //  For each assignedChore, build an html row with the icon (w/title & points), check & remove buttons
+>>>>>>> fce4c90850710d78a95c474e24b74a01e57ac50b
       assignedChores.forEach((chore) => {
         // add assigned chores icon
 
@@ -184,7 +197,11 @@ $(document).ready(() => {
         // put checkmark in row
         rowEl += checkEl;
 
+<<<<<<< HEAD
         // add remove button
+=======
+        // build and add remove button to rowEl variable
+>>>>>>> fce4c90850710d78a95c474e24b74a01e57ac50b
         removeEl = begRemEl; // beginning
         removeEl += `data-id="${chore.id}" `; // data id with assigned Chore id so we know what was clicked
         removeEl += `data-choreid="${chore.ChoreId}"> `; // data id with chore id (primary key in chore table)
