@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 /* eslint-disable no-undef */
 /* eslint-disable max-len */
-=======
-/* eslint-disable max-len */
-/* eslint-disable no-undef */
->>>>>>> fce4c90850710d78a95c474e24b74a01e57ac50b
 /* eslint-disable no-unused-vars */
 
 // Wait until page is loaded
@@ -160,13 +155,8 @@ $(document).ready(() => {
     remImg += 'alt="remove">'; // alt for image
 
     $.get(`api/assignedchores/${childId}`, (assignedChores) => {
-<<<<<<< HEAD
       //  For each assignedChore, build an html row with the icon (w/title & points),
       //     check & remove buttons
-=======
-      // eslint-disable-next-line max-len
-      //  For each assignedChore, build an html row with the icon (w/title & points), check & remove buttons
->>>>>>> fce4c90850710d78a95c474e24b74a01e57ac50b
       assignedChores.forEach((chore) => {
         // add assigned chores icon
 
@@ -197,11 +187,7 @@ $(document).ready(() => {
         // put checkmark in row
         rowEl += checkEl;
 
-<<<<<<< HEAD
         // add remove button
-=======
-        // build and add remove button to rowEl variable
->>>>>>> fce4c90850710d78a95c474e24b74a01e57ac50b
         removeEl = begRemEl; // beginning
         removeEl += `data-id="${chore.id}" `; // data id with assigned Chore id so we know what was clicked
         removeEl += `data-choreid="${chore.ChoreId}"> `; // data id with chore id (primary key in chore table)
