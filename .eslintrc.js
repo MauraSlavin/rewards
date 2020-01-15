@@ -25,6 +25,7 @@ module.exports = {
   },
   rules: {
     "no-console": "off",
-    "linebreak-style": "off"
+    "linebreak-style": "off",
+    "no-undef": "off"
   },
 };
