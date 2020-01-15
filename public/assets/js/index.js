@@ -6,6 +6,17 @@
 /* eslint-disable no-unused-vars */
 // Wait until page is loaded
 $(document).ready(() => {
+
+  // array of chores child clicked as done.
+  // each object has:
+  // --- id: (assignedChores id)
+  // --- choreId: choreId
+  // --- points: points of chore done
+  const choresDone = [];
+
+  // need child's point balance in more than one place
+  let ptsBalance = 0;
+
   // These need to be done...
 
   // **** LISTENING - COLUMN 1
@@ -16,27 +27,16 @@ $(document).ready(() => {
   //       and with "remove" button
   //   Write record to assignedChores with current childid and chore chosen
 
-  // **** LISTENING - COLUMN 2 ----
-
-  // Listen for click on any CHECKMARK
-  //    When first is clicked, enable "Request Parent Approval" button
-  //    Keep track of which Chores are clicked.
-  //    Keep checkmark colored as checked until Parent Approved is clicked.
-
   // Listen for click on any REMOVE
   //    When clicked,
   //      The corresponding record is deleted from the assignedChores table
   //      The chore is removed from the page (along with the checkmark and remove button)
 
-  // Listen for "Request Parent Approval" button clicked
-  //    When clicked,
-  //    An email is sent to the parent
-  //    The Parent Approval button is enabled.
-  //    The Parent must physically come and click the "Parent Approval" button
+  // When "Request Parent Approval" button clicked
+  //   an email is sent to the parent
 
-  // **** LISTENING - COLUMN 3  (This was done in the html.)
-  // Listen for the Collect my Reward button to be clicked.
-  // Re-direct the user to the Rewards page.
+  // When a parent assigns a chore to the child, an email will be sent to the parent.
+
 
   // This function gets chore icons from the database, and updates the html page
   function loadChoreIcons() {
@@ -61,7 +61,7 @@ $(document).ready(() => {
         iconEl += '<img class="responsive-img" '; // start image tag w/class
         iconEl += `src="assets/css/images/${chore.iconfile}" `; // source for image
         iconEl += `alt="${chore.title}">`; // alt for image
-        iconEl += `${chore.title} - ${chore.points}`; // text for image if we use title, too
+        iconEl += `${chore.points}`; // text for image with the points
         // iconEl += `${chore.points}`; // text for image
         iconEl += '</img></button></div>'; // and end tags
         console.log(iconEl);
@@ -94,7 +94,8 @@ $(document).ready(() => {
       // put child's name in wherever there's a greetname class
       $('.greetname').text(child.name);
       // put point balance in column 3 box
-      $('#ptbalance').text(child.points);
+      ptsBalance = child.points; // ptsBalance is a global
+      $('#ptbalance').text(ptsBalance);
     });
   }
 >>>>>>> ae57a65ee14a461c18d7bd7ef98aa48c54046a1c
@@ -146,7 +147,8 @@ $(document).ready(() => {
     // beginning of icon element is always the same.
     begIconEl = '<div class="col s4 left iconbutton"> '; // start div for column with this icon button
     begIconEl
-      += '<button class="waves-effect waves-light hoverable z-depth-2 disabled" '; // most of button tag
+    // not really a button, but keep same formatting.  So no "hoverable" and make disabled.
+      += '<button class="waves-effect waves-light z-depth-2 disabled" '; // most of button tag; not a button!
 
     // beginning of check mark button
     begChkEl = '<div class="col s4 left iconbutton"> '; // start div for column with this checkmark button
@@ -185,7 +187,7 @@ $(document).ready(() => {
         iconEl += '<img class="responsive-img" '; // start image tag w/class
         iconEl += `<img src="assets/css/images/${chore.Chore.iconfile}" `; // source for image
         iconEl += `alt="${chore.Chore.title}">`; // alt for image
-        iconEl += `${chore.Chore.title} - ${chore.Chore.points}`; // text for image
+        iconEl += `${chore.Chore.points}`; // text for image (points chore is worth)
         // iconEl += '</img></button></div>'; // and end tags (icon not a button - Maura)
         iconEl += '<img></div>'; // and end tags
         // put icon in row
@@ -194,7 +196,8 @@ $(document).ready(() => {
         // add checkmark button
         checkEl = begChkEl; // beginning
         checkEl += `data-id="${chore.id}" `; // data id with assignedChore id so we know what was clicked
-        checkEl += `data-choreid="${chore.ChoreId}"> `; // data id with chore id (primary key in chore table)
+        checkEl += `data-choreid="${chore.ChoreId}" `; // chore id (primary key in chore table)
+        checkEl += `data-points="${chore.Chore.points}"> `; // points the chore is worth
         checkEl += chkImg; // include the checkmark image
         checkEl += '</button></div>'; // end tags
         // console.log(checkEl);
@@ -225,20 +228,33 @@ $(document).ready(() => {
     });
   } // end of loadAssignedChoreIcons function
 
+  // handles child requesting parental approval
+  // ***************************
+  //    needs to send email to parent!!
+  //
+  // ***************************
+  function handleRequestApproval(childId) {
+    // Still needs to send email to parent
+
+    // turn "Request Parent Approval" button off
+    // ...since we just did it, and don't need to do again
+    $('.request').attr('disabled', true);
+    // turn "Parent Approved" on for the parent to click
+    $('.approve').attr('disabled', false);
+  }
+
   // When the "Parent Approved" button clicked
-  //   When this is clicked:
-  //  done: A record is inserted in the doneChores table for each chore done
-  //  done: The corresponding record is deleted from the assignedChores table
-  //  ***   The chores chosen disappear from the "To Do" list
-  //  ***   The points for the child in the children table is increased by the points earned.
-  //  done: "You have earned ?? points." is updated in column 3.
-  //  NOT done: "Your total balance is ??." is updated in column 3.
-  //  done  The "Request Parent Approval" and "Parent Approved" buttons become disabled.
+  //  A record is inserted in the doneChores table for each chore done
+  //  The corresponding record is deleted from the assignedChores table
+  //  The chores chosen disappear from the "To Do" list
+  //  The points for the child in the children table is increased by the points earned.
+  //  "You have earned ?? points." is updated in column 3.
+  //  "Your total balance is ??." is updated in column 3.
+  //  The "Request Parent Approval" and "Parent Approved" buttons become disabled.
   function handleParentApproval(choresDone, childId) {
     // choresDone is an array of objects with id (from assignedChores), ChoreId, and points
     let pointsEarned = 0;
     // For each chore...
-    // ******  NEED TO REMOVE HTML from page for chores checked off
     //   Add the points for that chore to the points earned.
     //   Write a record in the doneChores table for each chore completed.
     //   Delete the record from the assignedChores table
@@ -253,16 +269,27 @@ $(document).ready(() => {
           .then(() => {
             console.log(`Chore:${choreDone.id} deleted from AssignedChores.`);
           })
-          .catch((err) => {
-            console.log(err);
-          }); // end of ajax DELETE
+          .then(() => {
+            $.ajax({
+              method: 'PUT',
+              url: `/api/children/${childId}/${pointsEarned}`,
+            }).catch((err) => {
+              console.log(err);
+            });
+          }); // end of ajax calls
 
-        // ******  NEED TO REMOVE HTML from page for chores checked off
       }); // end of post donechores
     }); // end of forEach
 
     // Put points earned this session in 3rd column.
     $('#ptsearned').text(pointsEarned);
+
+    // Put new balance on the html page
+    ptsBalance += pointsEarned; // update global points
+    $('#ptbalance').text(ptsBalance);
+
+    // Delete all rows with "todelete" class
+    $('.todelete').remove();
 
     // "Request Parent Approval" and "Parent Approved" buttons return to being disabled.
     $('.request').attr('disabled', true);
@@ -313,62 +340,45 @@ $(document).ready(() => {
   // Get data from database and dynamically create html before showing the user the page.
   renderIndexHTML();
 
-  // handle when Parent Approved button is clicked
-  //   $( "#target" ).click(function() {
-  //   alert( "Handler for .click() called." );
-  // });
-  $('.approve').attr('disabled', false); // Maura for testing
+  // listen for the "Parent Approved" button to be clicked.
   $('.approve').click(() => {
-    // expect choresDone to be an array of objects with id (from assignedChores) chore ids & points
-    // This should be available from the html.  Maybe retrieve within function??
-    // Need to know which CHECKMARKS where clicked.
-    // we know it's for child 1 because it only works for one child
-
-    // *****************
-    //    Need to get this information from the html when the check or remove button is clicked
-    // ******************
-    //
-    // for testing (Maura)
-    const choresDone = [
-      // determine what button was clicked in column 2
-      // for testing
-      {
-        id: 1,
-        choreId: 8,
-        points: 20,
-      },
-      {
-        id: 2,
-        choreId: 10,
-        points: 30,
-      },
-    ];
-    handleParentApproval(choresDone, 1);
+    handleParentApproval(choresDone, 1); // Only designed to work for child 1
   }); // end clicking on "Parent approval button"
 
-  // listen for click on checkmark or remove buttons
-  $('.column2icons').bind('click', () => {
+  // listen for click on "Request Parent Approval"
+  $('.request').click(() => {
+  // we know it's for child 1 because it only works for one child
+    console.log('Request parental approval was clicked.');
+    handleRequestApproval(1);
+  }); // end clicking on "Parent approval button"
+
+  // listen for click on any checkmark
+  $('.column2icons').on('click', '.checkbutton', function (event) {
+
+    let choreDone = {}; // object to push to doneChores array w/id, choreid & points
     console.log('Check or remove clicked.');
+
+    // make sure "Request Parent Approval" button is now enabled.
+    $('.request').attr('disabled', false);
+
     // id is the data-id (assignedChore id) from the icon clicked (from the html)
-    const id = $('.checkbutton').data('id');
-    // id is the data-choreId from the icon clicked (from the html)
-    const choreId = $('.checkbutton').data('choreid');
+    const id = $(this).data('id');
+    // data-choreId from the icon clicked (from the html)
+    const choreId = $(this).data('choreid');
+    // points from the html that the chore is worth
+    const points = $(this).data('points');
 
-    //
-    // ***  PROBLEM - ALWAYS RETURNS FIRST, REGARDLESS OF WHICH WAS CLICKED! ***
-    // PRobably should build choresDone array of objects here, rather than in the handleParentApproval method
-    //
+    // put data from html and put in object to push to global choresDone array
+    choreDone = {
+      id,
+      choreId,
+      points,
+    };
+    choresDone.push(choreDone);
 
-    console.log('\nassigned chore id:');
-    console.log(id);
-    console.log('\nchore id:');
-    console.log(choreId);
+    // add id to change look of row, and so we can delete it when the parent approves
+    $(this).parent().parent().addClass("todelete");
 
-    // pseudo code...
-    // If a Check button was clicked
-    //   handleCheckBtn();
-    // } else { if a Remove button was clicked
-    //   handleRemoveBtn();
-    // } // end if else stmt
+
   }); // end bind click stmt to listen for click on check or remove
 }); // end of $(document).ready
