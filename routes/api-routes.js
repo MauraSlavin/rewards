@@ -257,7 +257,6 @@ router.get('/children/:id', (req, res) => {
 });
 //
 
-<<<<<<< HEAD
 // 2) subtract the points from the child's point total in the children table
 
 // Maura - get parent email(s)
@@ -290,6 +289,4 @@ router.get('/api/children/:id', (req, res) => {
     console.log(dbChild.email); // returned S@gmail.com!!
   });
 });
-=======
->>>>>>> ae57a65ee14a461c18d7bd7ef98aa48c54046a1c
 module.exports = router;

@@ -7,6 +7,30 @@ console.log('hello world');
 
 // making sure the document is ready before I start binding click events
 $(document).ready(() => {
+
+  $.get('api/rewards', (rewards) => {
+    //  For each Chore, build an html icon (w/points),
+    rewards.forEach((reward) => {
+      // customize the image part of the icon element w/image, title and points; and append
+      iconEl = begIconEl; // beginning
+      iconEl += `data-id="${reward.id}"> `; // data id with chore id so we know what was clicked
+      iconEl += '<img class="responsive-img" '; // start image tag w/class
+      iconEl += `src="assets/css/images/${reward.iconfile}" `; // source for image
+      iconEl += `alt="${reward.title}">`; // alt for image
+      iconEl += `${reward.title} - ${reward.points}`; // text for image if we use title, too
+      // iconEl += `${chore.points}`; // text for image
+      iconEl += '</img></button></div>'; // and end tags
+      // console.log(iconEl);
+
+      // append row to html file in column 2
+      $('.column1').append(iconEl);
+    }); // end of forEach
+   }) // end of get
+    .catch((err) => {
+      console.log(err);
+    }); // end of catch
+  } // endof loadChoreIcons function
+
   // click event for all of the rewards
   $(document).on('click', '.rewardBtn', function (e) {
     e.preventDefault();
@@ -36,4 +60,4 @@ $(document).ready(() => {
         });
     });
   });
-});
+
