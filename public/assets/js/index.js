@@ -1,9 +1,7 @@
-<<<<<<< HEAD
 /* eslint-disable no-undef */
-=======
 /* eslint-disable max-len */
->>>>>>> a585e820438ad2bc5b4ea5216b6c27c15ce9940d
 /* eslint-disable no-unused-vars */
+
 // Wait until page is loaded
 $(document).ready(() => {
 
@@ -48,7 +46,7 @@ $(document).ready(() => {
     // <div for the col>
     begIconEl = '<div class="col s12 m4 left iconbutton icons"> '; // start div for column with this icon button
     // <button>
-    begIconEl += '<button class="waves-effect waves-light hoverable z-depth-2 '; // most of button tag. close after data-id added
+    begIconEl += '<button class="waves-effect waves-light hoverable z-depth-2 choreicon'; // most of button tag. close after data-id added
 
     $.get('api/chores', (chores) => {
       //  For each Chore, build an html icon (w/points),
@@ -75,18 +73,6 @@ $(document).ready(() => {
       }); // end of catch
   } // endof loadChoreIcons function
 
-<<<<<<< HEAD
-  // **** LOAD PAGE - COLUMN 2
-  // Build assigned chores with clickable checkmark and remove button
-  //    - one chore per row
-  // eslint-disable-next-line max-len
-  // ("Request Parent Approval" and "Parent Approved" buttons will be there and don't need to be dynamically built)
-  // "Request Parent Approval" and "Parent Approved" buttons start out disabled.
-  // passes in the child id.  Only one child, so the id is 1.
-  // eslint-disable-next-line no-use-before-define
-  loadAssignedChoreIcons(1);
-  //  disableButtons();
-=======
   // Loads child's name and puts in on the html page in a couple places
   //  (nav bar on the right, and Congratulations box)
   function greetChild(childId) {
@@ -98,7 +84,6 @@ $(document).ready(() => {
       $('#ptbalance').text(ptsBalance);
     });
   }
->>>>>>> ae57a65ee14a461c18d7bd7ef98aa48c54046a1c
 
   // This function gets children's names from the database,
   // and uses them for the dropdown list on the nav bar
@@ -167,13 +152,8 @@ $(document).ready(() => {
     remImg += 'alt="remove">'; // alt for image
 
     $.get(`api/assignedchores/${childId}`, (assignedChores) => {
-<<<<<<< HEAD
-      // eslint-disable-next-line max-len
-      //  For each assignedChore, build an html row with the icon (w/title & points), check & remove buttons
-=======
       //  For each assignedChore, build an html row with the icon (w/title & points),
       //     check & remove buttons
->>>>>>> ae57a65ee14a461c18d7bd7ef98aa48c54046a1c
       assignedChores.forEach((chore) => {
         // add assigned chores icon
 
@@ -205,9 +185,6 @@ $(document).ready(() => {
         rowEl += checkEl;
 
         // add remove button
-<<<<<<< HEAD
-        $('.column2icons').append(removeEl);
-=======
         removeEl = begRemEl; // beginning
         removeEl += `data-id="${chore.id}" `; // data id with assigned Chore id so we know what was clicked
         removeEl += `data-choreid="${chore.ChoreId}"> `; // data id with chore id (primary key in chore table)
@@ -221,7 +198,6 @@ $(document).ready(() => {
 
         // append row to html file in column 2
         $('.column2icons').append(rowEl);
->>>>>>> ae57a65ee14a461c18d7bd7ef98aa48c54046a1c
       });
     }).catch((err) => {
       console.log(err);
@@ -356,7 +332,6 @@ $(document).ready(() => {
   $('.column2icons').on('click', '.checkbutton', function (event) {
 
     let choreDone = {}; // object to push to doneChores array w/id, choreid & points
-    console.log('Check or remove clicked.');
 
     // make sure "Request Parent Approval" button is now enabled.
     $('.request').attr('disabled', false);
@@ -379,6 +354,10 @@ $(document).ready(() => {
     // add id to change look of row, and so we can delete it when the parent approves
     $(this).parent().parent().addClass("todelete");
 
+  }); // end bind click stmt to listen for click on check
 
-  }); // end bind click stmt to listen for click on check or remove
+
+
+
 }); // end of $(document).ready
+
