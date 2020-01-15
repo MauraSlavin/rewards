@@ -1,6 +1,11 @@
+/* eslint-disable quotes */
+/* eslint-disable consistent-return */
+/* eslint-disable func-names */
+/* eslint-disable prefer-arrow-callback */
 /* eslint-disable no-unused-vars */
 const router = require('express').Router();
 const db = require('../models');
+const email = require('../email.js');
 
 // get list of chores
 router.get('/chores', (req, res) => {
@@ -193,6 +198,13 @@ router.delete('/assignedchores/:childid/:choreid', (req, res) => {
 // 1)  add a record to the usedpoints table
 router.post('/usedpoints/:childid/:rewardid', (req, res) => {
   // console.log(`This is the response ${res}`);
+  email.transporter.sendMail(email.mailOptions('dahamilton10@yahoo.com', 'Your child has redeemed a reward', `<p> Hello World </p>`), function (error, info) {
+    if (error) {
+      return console.log(error);
+    }
+    console.log('Message sent: %s', info.messageId);
+    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+  });
   db.UsedPoint.create({
     ChildId: req.params.childid,
     RewardId: req.params.rewardid,
