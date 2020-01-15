@@ -1,6 +1,16 @@
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   const DoneChore = sequelize.define('DoneChore', {
-    // only has id (PRIMARY KEY) & 2 foreign keys (below), so nothing needed here.
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+    },
   });
 
   DoneChore.associate = (models) => {
