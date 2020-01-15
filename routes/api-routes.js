@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const router = require('express').Router();
 const db = require('../models');
 
@@ -50,7 +51,7 @@ router.get('/children/points/:id', (req, res) => {
     },
   }).then((dbChild) => {
     res.json(dbChild);
-    // console.log(`Child's points: ${dbChild.points}.`); // Maura  console logged 15 with test data!
+    // console.log(`Child's points: ${dbChild.points}.`); // Maura  console logged 15 with test data
   });
 });
 
@@ -191,7 +192,7 @@ router.delete('/assignedchores/:childid/:choreid', (req, res) => {
 
 // 1)  add a record to the usedpoints table
 router.post('/usedpoints/:childid/:rewardid', (req, res) => {
-  console.log(`This is the response ${res}`);
+  // console.log(`This is the response ${res}`);
   db.UsedPoint.create({
     ChildId: req.params.childid,
     RewardId: req.params.rewardid,
