@@ -1,9 +1,7 @@
-<<<<<<< HEAD
-/* eslint-disable no-undef */
-=======
 /* eslint-disable max-len */
->>>>>>> a585e820438ad2bc5b4ea5216b6c27c15ce9940d
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
+
 // Wait until page is loaded
 $(document).ready(() => {
 
@@ -75,18 +73,6 @@ $(document).ready(() => {
       }); // end of catch
   } // endof loadChoreIcons function
 
-<<<<<<< HEAD
-  // **** LOAD PAGE - COLUMN 2
-  // Build assigned chores with clickable checkmark and remove button
-  //    - one chore per row
-  // eslint-disable-next-line max-len
-  // ("Request Parent Approval" and "Parent Approved" buttons will be there and don't need to be dynamically built)
-  // "Request Parent Approval" and "Parent Approved" buttons start out disabled.
-  // passes in the child id.  Only one child, so the id is 1.
-  // eslint-disable-next-line no-use-before-define
-  loadAssignedChoreIcons(1);
-  //  disableButtons();
-=======
   // Loads child's name and puts in on the html page in a couple places
   //  (nav bar on the right, and Congratulations box)
   function greetChild(childId) {
@@ -98,7 +84,6 @@ $(document).ready(() => {
       $('#ptbalance').text(ptsBalance);
     });
   }
->>>>>>> ae57a65ee14a461c18d7bd7ef98aa48c54046a1c
 
   // This function gets children's names from the database,
   // and uses them for the dropdown list on the nav bar
@@ -154,26 +139,24 @@ $(document).ready(() => {
     begChkEl = '<div class="col s4 left iconbutton"> '; // start div for column with this checkmark button
     begChkEl
       += '<button class="waves-effect waves-light hoverable z-depth-2 checkbutton" '; // most of checkmark button tag
-    chkImg = '<img class="responsive-img" '; // start image tag with class
-    chkImg += 'src="assets/css/images/check.png" '; // source for image
-    chkImg += 'alt="checkmark">'; // alt for image
 
     // beginning of remove button
     begRemEl = '<div class="col s4 left iconbutton"> '; // start div for column with this remove button
     begRemEl
       += '<button class="waves-effect waves-light red hoverable z-depth-2 removebutton" '; // most of remove button tag
+
+    // checkmark image  
+    chkImg = '<img class="responsive-img" '; // start image tag with class
+    chkImg += 'src="assets/css/images/check.png" '; // source for image
+    chkImg += 'alt="checkmark">'; // alt for image
+    
     remImg = '<img class="responsive-img" '; // start image tag with class
     remImg += 'src="assets/css/images/remove.png" '; // source for image
     remImg += 'alt="remove">'; // alt for image
 
     $.get(`api/assignedchores/${childId}`, (assignedChores) => {
-<<<<<<< HEAD
       // eslint-disable-next-line max-len
       //  For each assignedChore, build an html row with the icon (w/title & points), check & remove buttons
-=======
-      //  For each assignedChore, build an html row with the icon (w/title & points),
-      //     check & remove buttons
->>>>>>> ae57a65ee14a461c18d7bd7ef98aa48c54046a1c
       assignedChores.forEach((chore) => {
         // add assigned chores icon
 
@@ -204,10 +187,7 @@ $(document).ready(() => {
         // put checkmark in row
         rowEl += checkEl;
 
-        // add remove button
-<<<<<<< HEAD
-        $('.column2icons').append(removeEl);
-=======
+        // build and add remove button to rowEl variable
         removeEl = begRemEl; // beginning
         removeEl += `data-id="${chore.id}" `; // data id with assigned Chore id so we know what was clicked
         removeEl += `data-choreid="${chore.ChoreId}"> `; // data id with chore id (primary key in chore table)
@@ -221,7 +201,6 @@ $(document).ready(() => {
 
         // append row to html file in column 2
         $('.column2icons').append(rowEl);
->>>>>>> ae57a65ee14a461c18d7bd7ef98aa48c54046a1c
       });
     }).catch((err) => {
       console.log(err);
