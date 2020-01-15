@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* eslint-disable no-undef */
+=======
+/* eslint-disable max-len */
+>>>>>>> a585e820438ad2bc5b4ea5216b6c27c15ce9940d
 /* eslint-disable no-unused-vars */
 // Wait until page is loaded
 $(document).ready(() => {
@@ -49,6 +53,8 @@ $(document).ready(() => {
     $.get('api/chores', (chores) => {
       //  For each Chore, build an html icon (w/points),
       chores.forEach((chore) => {
+        console.log(chore);
+
         // customize the image part of the icon element w/image, title and points; and append
         iconEl = begIconEl; // beginning
         iconEl += `data-id="${chore.id}"> `; // data id with chore id so we know what was clicked
@@ -58,7 +64,7 @@ $(document).ready(() => {
         iconEl += `${chore.title} - ${chore.points}`; // text for image if we use title, too
         // iconEl += `${chore.points}`; // text for image
         iconEl += '</img></button></div>'; // and end tags
-        // console.log(iconEl);
+        console.log(iconEl);
 
         // append row to html file in column 2
         $('.column1').append(iconEl);
