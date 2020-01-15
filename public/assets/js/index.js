@@ -1,5 +1,10 @@
+<<<<<<< HEAD
+/* eslint-disable no-undef */
+/* eslint-disable max-len */
+=======
 /* eslint-disable max-len */
 /* eslint-disable no-undef */
+>>>>>>> fce4c90850710d78a95c474e24b74a01e57ac50b
 /* eslint-disable no-unused-vars */
 
 // Wait until page is loaded
@@ -46,7 +51,7 @@ $(document).ready(() => {
     // <div for the col>
     begIconEl = '<div class="col s12 m4 left iconbutton icons"> '; // start div for column with this icon button
     // <button>
-    begIconEl += '<button class="waves-effect waves-light hoverable z-depth-2 '; // most of button tag. close after data-id added
+    begIconEl += '<button class="waves-effect waves-light hoverable z-depth-2 choreicon'; // most of button tag. close after data-id added
 
     $.get('api/chores', (chores) => {
       //  For each Chore, build an html icon (w/points),
@@ -155,8 +160,13 @@ $(document).ready(() => {
     remImg += 'alt="remove">'; // alt for image
 
     $.get(`api/assignedchores/${childId}`, (assignedChores) => {
+<<<<<<< HEAD
+      //  For each assignedChore, build an html row with the icon (w/title & points),
+      //     check & remove buttons
+=======
       // eslint-disable-next-line max-len
       //  For each assignedChore, build an html row with the icon (w/title & points), check & remove buttons
+>>>>>>> fce4c90850710d78a95c474e24b74a01e57ac50b
       assignedChores.forEach((chore) => {
         // add assigned chores icon
 
@@ -187,7 +197,11 @@ $(document).ready(() => {
         // put checkmark in row
         rowEl += checkEl;
 
+<<<<<<< HEAD
+        // add remove button
+=======
         // build and add remove button to rowEl variable
+>>>>>>> fce4c90850710d78a95c474e24b74a01e57ac50b
         removeEl = begRemEl; // beginning
         removeEl += `data-id="${chore.id}" `; // data id with assigned Chore id so we know what was clicked
         removeEl += `data-choreid="${chore.ChoreId}"> `; // data id with chore id (primary key in chore table)
@@ -335,7 +349,6 @@ $(document).ready(() => {
   $('.column2icons').on('click', '.checkbutton', function (event) {
 
     let choreDone = {}; // object to push to doneChores array w/id, choreid & points
-    console.log('Check or remove clicked.');
 
     // make sure "Request Parent Approval" button is now enabled.
     $('.request').attr('disabled', false);
@@ -358,6 +371,10 @@ $(document).ready(() => {
     // add id to change look of row, and so we can delete it when the parent approves
     $(this).parent().parent().addClass("todelete");
 
+  }); // end bind click stmt to listen for click on check
 
-  }); // end bind click stmt to listen for click on check or remove
+
+
+
 }); // end of $(document).ready
+
