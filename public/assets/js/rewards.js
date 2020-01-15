@@ -10,7 +10,6 @@ $(document).ready(() => {
   // click event for all of the rewards
   $(document).on('click', '.rewardBtn', function (e) {
     e.preventDefault();
-    // $(this).clone().appendTo('#reward-display');
     // since this is just copy and pasting I'm just going to change the html of the reward-display to the html of what was clicked
     const card = $(this).clone();
     console.log(card);
