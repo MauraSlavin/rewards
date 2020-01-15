@@ -9,269 +9,183 @@
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <!-- <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" /> -->
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
-    <title> My Chores </title>
+    <title> Parent1 Authentication </title>
 </head>
 
 <body>
     <div class="navbar-fixed">
-        <nav class="teal">
-            <!-- <div class="container"> -->
-            <div class="nav-wrapper">
-                <a href="#!" class="brand-logo center">My Daily Chores</a>
+        <nav>
+            <div class="nav-wrapper teal">
+                <a href="#!" class="brand-logo center">Rewards</a>
+                <a href="#!" class="name right" style="margin-right: 100px;">Hello <span
+                        class="amber-text text-accent-4 greetname" style="font-size: 20px;" id="child1"></span></a>
+                <a href="home.html" class="name right" style="margin-right: 25px;">Logout <span
+                        class="amber-text text-accent-4 greetname" style="font-size: 20px;" id="child1"></span></a>
+
+                <!--dropdown-->
+                <ul id="dropdown1" class="dropdown-content">
+                    <div class="parentlinks"></div>
+                    <!-- <li><a href="parent1.html">Parent 1</a></li>
+                    <li><a href="parent2.html">parent2</a></li> -->
+                    <li class="divider"></li>
+                    <div class="childlinks"></div>
+                    <!-- <li><a href="index.html">Child 1</a></li>
+                    <li><a href="child2.html">Child 2</a></li> -->
+                    <li class="divider"></li>
+                    <li><a href="rewards.html">Rewards</a></li>
+                    <li><a href="iconLibrary.html">Icons</a></li>
+                </ul>
+
+                <!--Mobile nav menu-->
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger">
                     <i class="material-icons">menu</i>
                 </a>
-                <ul class="left hide-on-med-and-down">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="parent1.html">Parent 1</a></li>
-                    <li><a href="iconImages.html">Icons</a></li>
-                    <li><a href="child1.html">Child 1</a></li>
-                    <li><a href="child2.html">Child 2</a></li>
 
+                <ul class="left hide-on-med-and-down">
+                    <li><a href="home.html">Home</a></li>
+                    <!-- Dropdown Trigger -->
+                    <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Login
+                            <i class="material-icons right">arrow_drop_down</i>
+                        </a>
+                    </li>
                 </ul>
+
             </div>
-            <!-- </div> -->
         </nav>
     </div>
 
+    <!--mobile menu-->
     <ul class="sidenav" id="mobile-demo">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="parent1.html">Parent 1</a></li>
-        <li><a href="iconImages.html">Icons</a></li>
-        <li><a href="child1.html">Child 1</a></li>
-        <li><a href="child2">Child 2</a></li>
+        <li><a href="home.html">Home</a></li>
+        <div class="parentlinks"></div>
+        <!-- <li><a href="parent1.html">Parent 1</a></li> -->
+        <!-- <li><a href="parent2.html">Parent 2</a></li> -->
+        <div class="childlinks"></div>
+        <!-- <li><a href="index.html">Child 1</a></li> -->
+        <!-- <li><a href="child2.html">Child 2</a></li> -->
+        <li><a href="rewards.html">Rewards</a></li>
     </ul>
 
     <section class="section section-icons grey lighten-4 center">
-        <div class="container">
-            <h3 class="teal-text center">Ways to Earn My Rewards</h1>
-        </div>
+        <h3 class="teal-text center" style="margin-top: 0px;">Ways to Earn Rewards</h3>
+        <h4 class="teal-text center" style="margin-bottom: 0px; margin-top: 0px;">Let's get stared!</h4>
     </section>
-    <!-- 3 separate card panels -->
-    <section>
-        <div class="row">
-            <div class="col s12 m4">
-                <div class="card-panel light-blue lighten-2">
-                    <!--row1-->
-                    <div class="row">
-                        <div class="col s12 m4">
-                            <button class="waves-effect waves-light hoverable z-depth-2 ">
-                                <img class="responsive-img" src="assets/css/images/bath_dog.png" alt="bath dog">10</img>
-                            </button>
-                        </div>
 
-                        <div class="col s12 m4">
-                            <button class="waves-effect waves-light hoverable z-depth-2 ">
-                                <img class="responsive-img" src="assets/css/images/do_worbook.png"
-                                    alt="workbook">10</img>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="col s12 m4">
-                        <button class="waves-effect waves-light"><img class="responsive-img" class="icons"
-                                src="assets/css/images/watering.png" alt="watering">10</img>
-                        </button>
-                    </div>
-
-                </div>
+    <!-- row of labels-->
+    <div class="row  grey lighten-4 " style="margin-bottom: 0px;">
+        <div class="col s12 m4">
+            <div class="card light-blue lighten-2">
+                <h5 class="black-text center">Select My Chores</h5>
             </div>
-            <!--row2-->
-            <div class="container">
-                <div class="row">
-                    <div class="col s12 m4">
-                        <button class="waves-effect waves-light hoverable z-depth-2 ">
-                            <img class="responsive-img" src="assets/css/images/pickup_toys (1).png"
-                                alt="pickup toys">10</img>
-                        </button>
-                    </div>
-
-                    <div class="col s12 m4">
-                        <button class="waves-effect waves-light hoverable z-depth-2 ">
-                            <img class="responsive-img" src="assets/css/images/fishbowl.png" alt="fish bowl">10</img>
-                        </button>
-                    </div>
-                    <div class="col s12 m4">
-                        <button class="waves-effect waves-light hoverable z-depth-2 ">
-                            <img class="responsive-img" class="icons" src="assets/css/images/broom.png"
-                                alt="broom">10</img>
-                        </button>
-                    </div>
-                </div>
+        </div>
+        <div class="col s12 m4">
+            <div class="card light-blue lighten-2">
+                <h5 class="black-text center">To Do List</h5>
             </div>
-            <!--row3-->
-            <div class="container">
-                <div class="row">
-                    <div class="col s12 m4">
-                        <button class="waves-effect waves-light hoverable z-depth-2 ">
-                            <img class="responsive-img" src="assets/css/images/folding-clothes.png"
-                                alt="folding clothes">20</img>
-                        </button>
-                    </div>
-
-                    <div class="col s12 m4">
-                        <button class="waves-effect waves-light hoverable z-depth-2 ">
-                            <img class="responsive-img" src="assets/css/images/make_bed.png" alt="make bed">20</img>
-                        </button>
-                    </div>
-                    <div class="col s12 m4">
-                        <button class="waves-effect waves-light hoverable z-depth-2 ">
-                            <img class="responsive-img" src="assets/css/images/reading-book.png"
-                                alt="read book">20</img>
-                        </button>
-                    </div>
-                </div>
+        </div>
+        <div class="col s12 m4">
+            <div class="card light-blue lighten-2">
+                <h5 class="black-text center">Points</h5>
             </div>
-            <!--row4-->
-            <div class="container">
-                <div class="row">
-                    <div class="col s12 m4">
-                        <button class="waves-effect waves-light hoverable z-depth-2 ">
-                            <img class="responsive-img" src="assets/css/images/set_table.png" alt="set table">30</img>
-                        </button>
-                    </div>
-                    <div class="col s12 m4">
-                        <button class="waves-effect waves-light hoverable z-depth-2 ">
-                            <img class="responsive-img" src="assets/css/images/table.png" alt="clear table">30</img>
-                        </button>
-                    </div>
-                    <div class="col s12 m4">
-                        <button class="waves-effect waves-light hoverable z-depth-2">
-                            <img class="responsive-img" src="assets/css/images/trash.png" alt="trash">30</img>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <!--row5-->
-            <div class="container">
-                <div class="row">
-                    <div class="col s12 m4">
-                        <button class="waves-effect waves-light hoverable z-depth-2">
-                            <img class="responsive-img" src="assets/css/images/vacuum.png" alt="vacuum">40</img>
-                        </button>
-                    </div>
-                    <div class="col s12 m4">
-                        <button class="waves-effect waves-light hoverable z-depth-2">
-                            <img class="responsive-img" src="assets/css/images/walk_dog.png" alt="walk dog">40</img>
-                        </button>
-                    </div>
-
-                    <div class="col s12 m4">
-                        <button class="waves-effect waves-light hoverable z-depth-2">
-                            <img class="materialboxed responsive-img" class="icons"
-                                src="assets/css/images/wash_dish.png" alt="wash dish">40</img>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <!-- </div>
-        </div> -->
-            <!--2nd Column-->
-            <div class="col s12 m4">
-                <div class="card-panel light-blue lighten-2">
-                    <h2>Chores To Do</h2>
-                    <p>icons will appear here with option to remove. A parent will approve the chores after completion
-                        and click the done button.</p>
-                    <div class="container">
-                        <div class="row">
-
-
-
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="row">
-
-
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="row">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--3rd column-->
-            <div class="col s12 m4">
-                <div class="card-panel light-blue lighten-2">
-                    <h4>Awesome Job {name} !</h4>
-                    <h6>You've Earned { } Points!</h6>
-
-                    <p>This section will show points earned, used up, and left over.</p>
-                    <h6>Click on the button below to choose your reward!</h6>
-                    <div class="container">
-                        <div class="row">
-
-
-                        </div>
-                    </div>
-
-                    <div class="container">
-                        <div class="row">
-                            <div class="col s12 m4">
-
-
-                            </div>
-                        </div>
-
-                        <div class="container">
-                            <div class="row">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                </sectionclass="card-panel light-blue lighten-2">
-
-
-                <!-- 
-
-    
-    <div class="rewards">
-        <button  class="waves-effect waves-light "><img class="responsive-img" class="icons"
-                src="assets/css/images/salary (1).png" alt="cash">18</img></button>
-        <button  class="waves-effect waves-light "><img class="responsive-img" class="icons"
-                src="assets/css/images/computer.png" alt="screen">19</img></button>
-        <button  class="waves-effect waves-light "><img class="responsive-img" class="icons"
-                src="assets/css/images/cinema.png" alt="movie">21</img></button>
-        <button  class="waves-effect waves-light "><img class="responsive-img" class="icons"
-                src="assets/css/images/family.png" alt="familytime">22</img></button>
+        </div>
     </div>
 
-    <br>
 
-    <div class="extras">
+    <!-- Column 1 -->
+    <div class="row grey lighten-4">
+        <div class="col s12 m4">
+            <div class="card-panel light-blue lighten-2">
 
-        <button  class="waves-effect waves-light "><img class="responsive-img" class="icons"
-                src="assets/css/images/check.png" alt="checkmark">20</img></button>
-        <button  class="waves-effect waves-light "><img class="responsive-img" class="icons"
-                src="assets/css/images/ribbon.png" alt="ribbon">17</img></button>
-    </div> -->
+                <!--rows of chore icons-->
+                <div class="row column1">
+                    <!-- chores are added dynamically here -->
+                </div> <!-- ends row(s) of chore icons -->
+            </div> <!-- ends card -->
+        </div> <!-- ends first column -->
+
+
+        <!--Column 2-->
+
+
+        <div class="col s12 m4">
+            <div class="card-panel light-blue lighten-2">
+                <!-- icons is used for formatting; column2icons is used to append icons -->
+                <!-- icons may be used other places, column2icons may not! -->
+
+                <div class="column2icons">
+                    <!-- append assigned chore icons here -->
+                </div>
+
+                <div class="row center" style="margin-bottom: 0px;">
+                    <button class="btn btn-large green black-text waves-effect waves-light hoverable z-depth-2 request">
+                        <strong>Request Parent Approval!</strong>
+                    </button>
+                </div>
+
+                <div class="row center" style="margin-bottom: 0px;">
+                    <button class="btn btn-large  cyan black-text waves-effect waves-light hoverable z-depth-2 approve"
+                        style="margin-top: 20px">
+                        <strong>Approved!</strong>
+                    </button>
+                </div> <!-- end of row -->
+            </div> <!-- ends card -->
+
+        </div> <!-- ends second column -->
+
+
+        <!--Column 3-->
+
+        <div class="col s12 m4">
+            <div class="card-panel light-blue lighten-2">
+                <h4 class="text center" style="margin-top: 0px;">Congratulations</h4>
+                <!-- changed h5 so it gets the name of the child from the database - Maura -->
+                <!-- <h5 class="text center" style="margin-top: 0px; margin-bottom: 30px">
+                    {Lauren}</h5> -->
+                <h5 class="text center greetname" style="margin-top: 0px; margin-bottom: 30px">Name</h5>
+                <div class="container">
+                    <div class="row">
+                        <h6><strong>You've earned { } points today!</strong></h6>
+
+                        <h6><strong>Your total balance is:</strong></h6>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row center" style="margin-bottom: 0px;">
+                        <a href="rewards.html"
+                            class="btn btn-large red lighten-2 black-text waves-effect waves-light hoverable z-depth-2"
+                            style="margin-top: 30 px;"><strong>Collect My Reward!</strong>
+                        </a>
+                    </div> <!-- end of div class row center -->
+                </div> <!-- end of container -->
+            </div> <!-- end of card -->
+        </div> <!-- end of column 3-->
+    </div>
 
 
 
+    <!--JavaScript at end of body for optimized loading-->
+    <!-- <script type="text/javascript" src="js/materialize.min.js"></script> -->
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script>
+        //side nav
+        const sideNav = document.querySelector(".sidenav");
+        M.Sidenav.init(sideNav, {});
 
-
-                <!--JavaScript at end of body for optimized loading-->
-                <script type="text/javascript" src="js/materialize.min.js"></script>
-                <!-- Compiled and minified JavaScript -->
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-                <!-- Compiled and minified JavaScript -->
-                <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-                    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-                <script>
-                    //side nav
-                    const sideNav = document.querySelector(".sidenav");
-                    M.Sidenav.init(sideNav, {});
-                </script>
+        //drop down
+        const dropDown = document.querySelectorAll(".dropdown-trigger");
+        const instanceDropdown = M.Dropdown.init(dropDown, {hover: false});
+    </script>
+    <script src="assets/js/index.js" type="text/javascript"></script>
 
 </body>
 
