@@ -289,4 +289,6 @@ router.get('/children/:id', (req, res) => {
 //     console.log(dbChild.email); // returned S@gmail.com!!
 //   });
 // });
-// module.exports = router;
+
+
+module.exports = router;
