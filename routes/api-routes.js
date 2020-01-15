@@ -83,7 +83,7 @@ router.get('/assignedchores/choreid/:id', (req, res) => {
     },
   }).then((dbChore) => {
     const choreId = dbChore.ChoreId;
-    console.log(`The choreId for this assigned chore is ${choreId}.`);
+    // console.log(`The choreId for this assigned chore is ${choreId}.`);
     res.json(dbChore);
   });
 });
@@ -98,7 +98,7 @@ router.get('/chores/points/:id', (req, res) => {
     },
   }).then((dbChore) => {
     const chorePoints = dbChore.points;
-    console.log(`This chore is worth ${chorePoints} points.`);
+    // console.log(`This chore is worth ${chorePoints} points.`);
     res.json(dbChore);
   });
 });
@@ -112,9 +112,11 @@ router.delete('/assignedchores/:id', (req, res) => {
       id: req.params.id,
     },
   }).then((dbAssignedChore) => {
-    //   res.json(dbAssignedChore);
+    res.json(200);
     console.log(dbAssignedChore);
     console.log(`Assigned chore with id of ${req.params.id} has been deleted.`);
+  }).catch(() => {
+    res.send(500, 'Error deleting a record from the assignedChores table.');
   });
 });
 
@@ -149,7 +151,7 @@ router.post('/donechores/:childid/:choreid', (req, res) => {
     ChoreId: req.params.choreid,
   }).then((dbDone) => {
     res.json(dbDone); // Maura commented
-    console.log(dbDone); // Maura
+    // console.log(dbDone); // Maura
     console.log(
       `A record of the done chore with chore id of ${req.params.choreid} has been added.`,
     );
@@ -248,7 +250,9 @@ router.get('/children/:id', (req, res) => {
     },
   }).then((dbChild) => {
     res.json(dbChild);
-    console.log(dbChild.email); // Maura  returned S@gmail.com!!
+    console.log('dbChild (for dbCHild.email):');
+    // console.log(dbChild);
+    // console.log(dbChild.email); // Maura  returned S@gmail.com!!
   });
 });
 

@@ -1,5 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
   const Parent = sequelize.define('Parent', {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -20,6 +25,12 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         isEmail: true,
       },
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
     },
   });
 
