@@ -257,36 +257,36 @@ router.get('/children/:id', (req, res) => {
 });
 //
 
-// 2) subtract the points from the child's point total in the children table
+// // 2) subtract the points from the child's point total in the children table
 
-// Maura - get parent email(s)
-router.get('/api/parents/:id', (req, res) => {
-  // Here we add an "include" property to our options in our findOne query
-  // We set the value to an array of the models we want to include in a left outer join
-  // In this case, just db.Post
-  db.Parent.findOne({
-    where: {
-      id: req.params.id,
-    },
-  }).then((dbParent) => {
-    res.json(dbParent);
-    console.log(dbParent.email); // returned Andy@gmail.com!!
-    console.log(dbParent.alt_email);
-  });
-});
+// // Maura - get parent email(s)  (duplicate)
+// router.get('/api/parents/:id', (req, res) => {
+//   // Here we add an "include" property to our options in our findOne query
+//   // We set the value to an array of the models we want to include in a left outer join
+//   // In this case, just db.Post
+//   db.Parent.findOne({
+//     where: {
+//       id: req.params.id,
+//     },
+//   }).then((dbParent) => {
+//     res.json(dbParent);
+//     console.log(dbParent.email); // returned Andy@gmail.com!!
+//     console.log(dbParent.alt_email);
+//   });
+// });
 
-// Maura - get child email
-router.get('/api/children/:id', (req, res) => {
-  // Here we add an "include" property to our options in our findOne query
-  // We set the value to an array of the models we want to include in a left outer join
-  // In this case, just db.Post
-  db.Child.findOne({
-    where: {
-      id: req.params.id,
-    },
-  }).then((dbChild) => {
-    res.json(dbChild);
-    console.log(dbChild.email); // returned S@gmail.com!!
-  });
-});
-module.exports = router;
+// // Maura - get child email  (duplicate ??? )
+// router.get('/api/children/:id', (req, res) => {
+//   // Here we add an "include" property to our options in our findOne query
+//   // We set the value to an array of the models we want to include in a left outer join
+//   // In this case, just db.Post
+//   db.Child.findOne({
+//     where: {
+//       id: req.params.id,
+//     },
+//   }).then((dbChild) => {
+//     res.json(dbChild);
+//     console.log(dbChild.email); // returned S@gmail.com!!
+//   });
+// });
+// module.exports = router;
