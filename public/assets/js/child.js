@@ -94,7 +94,7 @@ $(document).ready(() => {
 
       // for each child, add a link to the dropdown list in the nav bar
       children.forEach((child) => {
-        childLink = `<li><a href="index.html">${child.name}</a></li>`;
+        childLink = `<li><a href="child.html">${child.name}</a></li>`;
         $('.childlinks').append(childLink);
       });
     });
@@ -110,7 +110,7 @@ $(document).ready(() => {
     $.get('api/parents', (parents) => {
       // add a link to the dropdown list in the nav bar for the each parent
       parents.forEach((parent) => {
-        parentLink = `<li><a href="parent1.html">${parent.name}</a></li>`;
+        parentLink = `<li><a href="parent.html">${parent.name}</a></li>`;
         $('.parentlinks').append(parentLink);
       }); // end of forEach
     }); // end of get
@@ -287,7 +287,7 @@ $(document).ready(() => {
     // needs to be written!!
   }
 
-  function renderIndexHTML() {
+  function renderChildPage() {
     // Greet the child by name on the right side of the nav bar
     //   and load total points balance
     // Only one child, so we know it is id 1
@@ -314,10 +314,10 @@ $(document).ready(() => {
     // "Request Parent Approval" and "Parent Approved" buttons start out disabled.
     $('.request').attr('disabled', true);
     $('.approve').attr('disabled', true);
-  } // end of renderIndexHTML function
+  } // end of renderChildPage function
 
   // Get data from database and dynamically create html before showing the user the page.
-  renderIndexHTML();
+  renderChildPage();
 
   // listen for the "Parent Approved" button to be clicked.
   $('.approve').click(() => {
