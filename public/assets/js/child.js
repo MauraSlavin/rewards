@@ -15,7 +15,7 @@ $(document).ready(() => {
   // checkmark and remove icons are needed in more than one place, so make a global
   // checkmark image
   let chkImg = '<img class="responsive-img" '; // start image tag with class
-  chkImg += 'src="assets/css/images/check.png" '; // source for image
+  chkImg += 'src="assets/css/images/checkClear.png" '; // source for image
   chkImg += 'alt="checkmark">'; // alt for image
 
   // remove image
@@ -28,24 +28,11 @@ $(document).ready(() => {
 
   // These need to be done...
 
-  // **** LISTENING - COLUMN 1
-  // Listen for click on a chore item in column 1
-  //   When that happens - capture what chore it was
-  //   Add the chore icon to the "To Do" list in column 2
-  //       with clickable check mark
-  //       and with "remove" button
-  //   Write record to assignedChores with current childid and chore chosen
-
-  // Listen for click on any REMOVE
-  //    When clicked,
-  //      The corresponding record is deleted from the assignedChores table
-  //      The chore is removed from the page (along with the checkmark and remove button)
-
-  // When "Request Parent Approval" button clicked
-  //   an email is sent to the parent
-
   // When a parent assigns a chore to the child, an email will be sent to the parent.
+  // When a child clicks "Request Parent Approval," an email is sent to the child.
 
+  //
+  //
   // This function gets chore icons from the database, and updates the html page
   function loadChoreIcons() {
     //  iconEl is the html elements for the icon
@@ -54,14 +41,15 @@ $(document).ready(() => {
 
     // beginning of icon element is always the same.
     // <div for the col>
-    begIconEl = '<div class="col s12 m4 left iconbutton icons"> '; // start div for column with this icon button
-    // <button>
+    begIconEl += '<div class="card light-blue lighten-2">';
+    // most of button tag. close after data-id added
     begIconEl
-      += '<button class="waves-effect waves-light hoverable z-depth-2 choreicon" '; // most of button tag. close after data-id added
+      += '<button class="waves-effect waves-light hoverable z-depth-2 choreicon" ';
 
     $.get('api/chores', (chores) => {
       //  For each Chore, build an html icon (w/points),
       chores.forEach((chore) => {
+
         // customize the image part of the icon element w/image, title and points; and append
         iconEl = begIconEl; // beginning
         // data id with chore id, chore title and file with icon image to use when clicked on to assign a chore
@@ -70,7 +58,6 @@ $(document).ready(() => {
         iconEl += `src="assets/css/images/${chore.iconfile}" `; // source for image
         iconEl += `alt="${chore.title}">`; // alt for image
         iconEl += `${chore.points}`; // text for image with the points
-        // iconEl += `${chore.points}`; // text for image
         iconEl += '</img></button></div>'; // and end tags
 
         // append row to html file in column 2
@@ -82,6 +69,8 @@ $(document).ready(() => {
       }); // end of catch
   } // endof loadChoreIcons function
 
+  //
+  //
   // Loads child's name and puts in on the html page in a couple places
   //  (nav bar on the right, and Congratulations box)
   function greetChild(childId) {
@@ -94,6 +83,8 @@ $(document).ready(() => {
     });
   }
 
+  //
+  //
   // This function gets children's names from the database,
   // and uses them for the dropdown list on the nav bar
   function loadChildrenNames() {
@@ -109,6 +100,8 @@ $(document).ready(() => {
     });
   } // endof loadChildrenNames function
 
+  //
+  //
   // This function gets parents' names from the database,
   // and uses them for the dropdown list on the nav bar
   function loadParentNames() {
@@ -125,6 +118,8 @@ $(document).ready(() => {
     }); // end of get
   } // endof loadParentsNames function
 
+  //
+  //
   // This function gets assigned chore icons from the database, and updates the html page
   function loadAssignedChoreIcons(childId) {
     //  iconEl, checkEl, removeEl are the html elements for the icon, check button and remove button
@@ -137,19 +132,19 @@ $(document).ready(() => {
     let removeEl = '';
 
     // beginning of icon element is always the same.
-    begIconEl = '<div class="col s4 left iconbutton"> '; // start div for column with this icon button
+    begIconEl = '<div class="col s4 left"> '; // start div for column with this icon button
     // begIconEl
     //   // not really a button, but keep same formatting.  So no "hoverable" and make disabled.
     begIconEl // most of button tag
-      += '<button class="waves-effect waves-light hoverable z-depth-2 checkbutton" '; // most of checkmark button tag
+      += '<button class="waves-effect waves-light hoverable z-depth-2 checkicon" '; // most of checkmark button tag
 
     // beginning of check mark button
-    begChkEl = '<div class="col s4 left iconbutton"> '; // start div for column with this checkmark button
+    begChkEl = '<div class="col s4 left"> '; // start div for column with this checkmark button
     begChkEl
       += '<button class="waves-effect waves-light hoverable z-depth-2 checkbutton" '; // most of checkmark button tag
 
     // beginning of remove button
-    begRemEl = '<div class="col s4 left iconbutton"> '; // start div for column with this remove button
+    begRemEl = '<div class="col s4 left"> '; // start div for column with this remove button
     begRemEl
       += '<button class="waves-effect waves-light red hoverable z-depth-2 removebutton" '; // most of remove button tag
 
@@ -171,12 +166,9 @@ $(document).ready(() => {
         iconEl += `src="assets/css/images/${chore.Chore.iconfile}" `; // source for image
         iconEl += `alt="${chore.Chore.title}">`; // alt for image
         iconEl += `${chore.Chore.points}`; // text for image (points chore is worth)
-        // iconEl += '</img></button></div>'; // and end tags (icon not a button - Maura)
         iconEl += '</img></button></div>'; // and end tags
         // put icon in row
         rowEl += iconEl;
-        console.log('Icon el:');
-        console.log(iconEl);
 
         // add checkmark button
         checkEl = begChkEl; // beginning
@@ -185,11 +177,8 @@ $(document).ready(() => {
         checkEl += `data-points="${chore.Chore.points}"> `; // points the chore is worth
         checkEl += chkImg; // include the checkmark image (global)
         checkEl += '</button></div>'; // end tags
-        // console.log(checkEl);
         // put checkmark in row
         rowEl += checkEl;
-        console.log('check el:');
-        console.log(checkEl);
 
         // add remove button
         removeEl = begRemEl; // beginning
@@ -199,8 +188,6 @@ $(document).ready(() => {
         removeEl += '</button></div>'; // end tags
         // put remove icon in row
         rowEl += removeEl;
-        console.log('remove el:');
-        console.log(removeEl);
 
         // end row
         rowEl += '</div>';
@@ -213,6 +200,8 @@ $(document).ready(() => {
     });
   } // end of loadAssignedChoreIcons function
 
+  //
+  //
   // handles child requesting parental approval
   // ***************************
   //    needs to send email to parent!!
@@ -228,6 +217,8 @@ $(document).ready(() => {
     $('.approve').attr('disabled', false);
   }
 
+  //
+  //
   // When the "Parent Approved" button clicked
   //  A record is inserted in the doneChores table for each chore done
   //  The corresponding record is deleted from the assignedChores table
@@ -237,7 +228,7 @@ $(document).ready(() => {
   //  "Your total balance is ??." is updated in column 3.
   //  The "Request Parent Approval" and "Parent Approved" buttons become disabled.
   function handleParentApproval(childId) {
-    // choresDone (global) is an array of objects with id (from assignedChores), ChoreId, and points
+    // choresDone (global) is an array of objects with assigned chore id (from assignedChores), ChoreId, and points
     let pointsEarned = 0;
     // For each chore...
     //   Add the points for that chore to the points earned.
@@ -246,9 +237,8 @@ $(document).ready(() => {
     choresDone.forEach((choreDone) => {
       // increment pointsEarned to keep track for message on page of points earned this session
       pointsEarned += choreDone.points;
-      console.log('choreDone obj:');
-      console.log(choreDone);
-      // $.post(`/api/donechores/${childId}/${choreDone.choreId}`, () => {
+
+      // it's child 1, because only functional for one child.
       $.ajax({
         method: 'DELETE',
         url: `/api/assignedchores/${choreDone.id}`,
@@ -259,7 +249,7 @@ $(document).ready(() => {
         .then(() => {
           $.ajax({
             method: 'PUT',
-            url: `/api/children/${childId}/${choreDone.points}`,
+            url: `/api/children/1/${choreDone.points}`,
           })
             .then(() => {
               $.ajax({
@@ -292,40 +282,35 @@ $(document).ready(() => {
     $('.approve').attr('disabled', true);
   } // end of handleParentApproval
 
-  // handle when check button is clicked
-  function handleCheckBtn() {
-    console.log('In handleCheckBtn - not written yet');
-    // needs to be written!!
-  }
-
-  // handle when remove button is clicked
-  function handleRemoveBtn() {
-    console.log('In handleRemoveBtn - not written yet');
-    // needs to be written!!
-  }
-
+  //
+  //
   function renderChildPage() {
     // Greet the child by name on the right side of the nav bar
     //   and load total points balance
     // Only one child, so we know it is id 1
     greetChild(1);
+    console.log('Child greeted by name.');
 
     // (started - Sophie is working on...)
     // Build chore icons with points for "chores" column from chores table
     // Each icon will be clickable
     loadChoreIcons();
+    console.log('Chore Icons in column 1 loaded.');
 
     // Populate dropdown list with child name from database
     loadChildrenNames();
+    console.log("Children's names are in dropdown list.");
 
     // Populate dropdown list with parent name from database
     loadParentNames();
+    console.log("Parents' names are in dropdown list.");
 
     // **** LOAD PAGE - COLUMN 2
     // Build assigned chores with clickable checkmark and remove button
     //    - one chore per row
     // passes in the child id.  Only one child, so the id is 1.
     loadAssignedChoreIcons(1);
+    console.log('To Do list is loaded.');
 
     // ("Request Parent Approval" and "Parent Approved" buttons will be there and don't need to be dynamically built)
     // "Request Parent Approval" and "Parent Approved" buttons start out disabled.
@@ -333,14 +318,26 @@ $(document).ready(() => {
     $('.approve').attr('disabled', true);
   } // end of renderChildPage function
 
+  //* *****************************************************************************************/
+  //
+  //   Starts running tha app here.  Stuff before here is defining globals and functions.
+  //
+  //* *****************************************************************************************/
   // Get data from database and dynamically create html before showing the user the page.
+  console.log('Functions defined.');
   renderChildPage();
+  console.log('Page is done loading.');
 
+  //
+  //
   // listen for the "Parent Approved" button to be clicked.
   $('.approve').click(() => {
+    console.log('Parent Approvel butten has been clicked.');
     handleParentApproval(1); // Only designed to work for child 1
   }); // end clicking on "Parent approval button"
 
+  //
+  //
   // listen for click on "Request Parent Approval"
   $('.request').click(() => {
     // we know it's for child 1 because it only works for one child
@@ -348,12 +345,27 @@ $(document).ready(() => {
     handleRequestApproval(1);
   }); // end clicking on "Parent approval button"
 
-  // listen for click on any checkmark or icon (in the assigned chores list)
+  //
+  //
+  // when checkmark in To Do list (assigned chores list) is clicked...
   $('.column2icons').on('click', '.checkbutton', function (event) {
-    let choreDone = {}; // object to push to doneChores array w/id, choreid & points
-
+    console.log('A checkmark has been clicked.');
     // make sure "Request Parent Approval" button is now enabled.
     $('.request').attr('disabled', false);
+
+    // replace un-checked checkmark icon with checked checkmark icon
+    // and make it disabled, so it doesn't get counted twice.
+    $(this)
+      .find('img')
+      .attr('src', 'assets/css/images/checkGreen.png');
+    $(this)
+      .attr('disabled', true);
+
+    // add id to change look of row, and so we can delete it when the parent approves
+    $(this)
+      .parent()
+      .parent()
+      .addClass('todelete');
 
     // id is the data-id (assignedChore id) from the icon clicked (from the html)
     const id = $(this).data('id');
@@ -363,141 +375,168 @@ $(document).ready(() => {
     const points = $(this).data('points');
 
     // put data from html and put in object to push to global choresDone array
-    choreDone = {
+    let choreDone = {
       id,
       choreId,
       points,
     };
+
     choresDone.push(choreDone);
+  });
+
+  //
+  //
+  // when icon in To Do list (assigned chores list) is clicked... (almost same as checkmark)
+  $('.column2icons').on('click', '.checkicon', function (event) {
+    console.log('A checkmark icon has been clicked.');
+    // make sure "Request Parent Approval" button is now enabled.
+    $('.request').attr('disabled', false);
 
     // add id to change look of row, and so we can delete it when the parent approves
+    // and make it disabled, so it doesn't get counted twice.
+    // replace un-checked checkmark icon with checked checkmark icon
+    $(this)
+      .parent()
+      .parent().addClass('todelete')
+      .find('.checkbutton').attr('disabled', true)
+      .find('img')
+      .attr('src', 'assets/css/images/checkGreen.png');
+
+    // and make this icon disabled, so it doesn't get counted twice.
+    $(this)
+      .attr('disabled', true);
+
+    // id is the data-id (assignedChore id) from the icon clicked (from the html)
+    const id = $(this).data('id');
+    // data-choreId from the icon clicked (from the html)
+    const choreId = $(this).data('choreid');
+    // points from the html that the chore is worth
+    const points = $(this).data('points');
+
+    // put data from html and put in object to push to global choresDone array
+    let choreDone = {
+      id,
+      choreId,
+      points,
+    };
+
+    choresDone.push(choreDone);
+  });
+
+  //
+  //
+  // listen for click on any remove icon (in the assigned chores list)
+  $('.column2icons').on('click', '.removebutton', function (event) {
+    console.log('A remove button has been clicked.');
+    // id is the data-id (assignedChore id) from the icon clicked (from the html)
+    const id = $(this).data('id');
+    // data-choreId from the icon clicked (from the html)
+    const choreId = $(this).data('choreid');
+
+    // remove element from page
     $(this)
       .parent()
       .parent()
-      .addClass('todelete');
-  }); // end bind click stmt to listen for click on check
+      .remove();
 
+    // remove chore from doneChores array (if it's there)
+    choresDone = $.grep(choresDone, (el, idx) => el.id == id, true);
+console.log('choresDone');
+console.log(choresDone);
+    // delete from assignedChores table
+    // we know it's child 1, since only implemented for 1 child.
+    $.ajax({
+      method: 'DELETE',
+      url: `/api/assignedchores/${id}`,
+    })
+      .then(() => {
+        console.log(`Chore:${id} deleted from AssignedChores.`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // if doneChores array now empty, disable Request Parent Approval button
+    if (choresDone.length === 0) {
+      $('.request').attr('disabled', true);
+    }
+  }); // end remove button click block
+
+  //
+  //
   // listen for click on an icon in the first column to assign a chore
   $('.column1').on('click', '.choreicon', function (event) {
+    console.log('An icon has been clicked to assign a chore.');
+
     // get chore id clicked from the html
     const id = $(this).data('id');
     const iconfile = $(this).data('file');
     const title = $(this).data('title');
     const points = $(this).data('points');
+    let newAssignedChoreId = ''; // will get from res when written to table
 
-    // ****** write record to assigned chores table
+    // write record to assigned chores table
     $.ajax({
       method: 'POST',
-      url: `/api/assignedchores/${childId}/${id}`,
-    }).then(() => {
-      console.log(`Chore ${id} written to assigned chores table for child 1.`);
-    }).catch(() => {
-      console.log(`Error writing chore ${id} to assigned chores table.`);
-    });
+      url: `/api/assignedchores/1/${id}`,
+    })
+      .then((res) => {
+        console.log(
+          `Chore ${id} written to assigned chores table for child 1.`,
+        );
+        newAssignedChoreId = res.id;
 
-    // clone icon and add to assigned chore column (col. 2) with check & remove buttons
-    const newIconRow = $(this).clone();
+      })
+      .then(() => {
+        // build the whole row, with the icon, check and remove icons
+        // beginning row
+        let rowEl = '<div class="row flex">';
+        rowEl += '<div class="col s4 left"> '; // start div for column with this icon button
 
-    // build the whole row, with the icon, check and remove icons
-    // beginning row
-    let rowEl = '<div class="row flex">';
-    rowEl += '<div class="col s4 left iconbutton"> '; // start div for column with this icon button
+        rowEl
+          += '<button class="waves-effect waves-light hoverable z-depth-2 checkicon" '; // most of checkmark button tag
+        rowEl += `data-id="${newAssignedChoreId}" `; // data id with assignedChore id so we know what was clicked
+        rowEl += `data-choreid="${id}" `; // chore id (primary key in chore table)
+        rowEl += `data-points="${points}"> `; // points the chore is worth
+        rowEl += '<img class="responsive-img" '; // start image tag w/class
+        rowEl += `<img src="assets/css/images/${iconfile}" `; // source for image
+        rowEl += `alt="${title}">`; // alt for image
+        rowEl += `${points}`; // text for image (points chore is worth)
+        rowEl += '</img></button></div>'; // and end tags
 
-    rowEl
-      += '<button class="waves-effect waves-light hoverable z-depth-2 checkbutton" '; // most of checkmark button tag
+        // add checkmark button
+        // beginning of check mark button
+        rowEl += '<div class="col s4 left"> '; // start div for column with this checkmark button
+        rowEl
+          += '<button class="waves-effect waves-light hoverable z-depth-2 checkbutton" '; // most of checkmark button tag
+        rowEl += `data-id="${newAssignedChoreId}" `; // data id with assignedChore id so we know what was clicked
+        rowEl += `data-choreid="${id}" `; // chore id (primary key in chore table)
+        rowEl += `data-points="${points}"> `; // points the chore is worth
+        rowEl += chkImg; // include the checkmark image (global)
+        rowEl += '</button></div>'; // end tags
 
-    //  *************  need to write to db first and get new assignedchore id before we can do this next line properly *************
-    // use #25 for testing
+        // add remove button
+        // beginning of remove button
+        rowEl += '<div class="col s4 left"> '; // start div for column with this remove button
+        rowEl
+          += '<button class="waves-effect waves-light red hoverable z-depth-2 removebutton" '; // most of remove button tag
+        rowEl += `data-id="${newAssignedChoreId}" `; // data id with assignedChore id so we know what was clicked
+        rowEl += `data-choreid="${id}"> `; // data id with chore id (primary key in chore table)
+        rowEl += remImg; // include the remove image (global)
+        rowEl += '</button></div>'; // end tags
 
-    rowEl += 'data-id="25" '; // data id with assignedChore id so we know what was clicked
-    rowEl += `data-choreid="${id}" `; // chore id (primary key in chore table)
-    rowEl += `data-points="${points}"> `; // points the chore is worth
-    rowEl += '<img class="responsive-img" '; // start image tag w/class
-    rowEl += `<img src="assets/css/images/${iconfile}" `; // source for image
-    rowEl += `alt="${title}">`; // alt for image
-    rowEl += `${points}`; // text for image (points chore is worth)
-    rowEl += '</img></button></div>'; // and end tags
+        // end row
+        rowEl += '</div></div>';
 
-    // add checkmark button
-    // beginning of check mark button
-    rowEl += '<div class="col s4 left iconbutton"> '; // start div for column with this checkmark button
-    rowEl
-      += '<button class="waves-effect waves-light hoverable z-depth-2 checkbutton" '; // most of checkmark button tag
+        // append row to html file in column 2
+        $('.column2icons').append(rowEl);
+      })
+      .catch(() => {
+        console.log(`Error writing chore ${id} to assigned chores table.`);
+      });
 
-    //  *************  need to write to db first and get new assignedchore id before we can do this next line properly *************
-    // use #25 for testing
-
-    rowEl += 'data-id="25" '; // data id with assignedChore id so we know what was clicked
-    rowEl += `data-choreid="${id}" `; // chore id (primary key in chore table)
-    rowEl += `data-points="${points}"> `; // points the chore is worth
-    rowEl += chkImg; // include the checkmark image (global)
-    rowEl += '</button></div>'; // end tags
-
-    // add remove button
-    // beginning of remove button
-    rowEl += '<div class="col s4 left iconbutton"> '; // start div for column with this remove button
-    rowEl
-      += '<button class="waves-effect waves-light red hoverable z-depth-2 removebutton" '; // most of remove button tag
-
-    //  *************  need to write to db first and get new assignedchore id before we can do this next line properly *************
-    // use #25 for testing
-
-    rowEl += 'data-id="25" '; // data id with assigned Chore id so we know what was clicked
-    rowEl += `data-choreid="${id}"> `; // data id with chore id (primary key in chore table)
-    rowEl += remImg; // include the remove image (global)
-    rowEl += '</button></div>'; // end tags
-
-    // end row
-    rowEl += '</div></div>';
-
-    // append row to html file in column 2
-    $('.column2icons').append(rowEl);
-  }); // end bind click stmt to listen for click on check
-
-  // // listen for click on any chore icon in column 1 to add to assigned chores list
-  // $('.column1').on('click', '.choreicon', function (event) {
-
-  //   // assigned chore just needs the choreid and childid (which is 1 in this release)
-  //   let assignedchore = {}; // object to clone to assigned chores list (& add to assignedChores table)
-  //   console.log('Clicked on icon to assign chore.');
-
-  //   // id is the data-id (Chore id) from the icon clicked (from the html)
-  //   console.log("$(this).data('id')  :");
-  //   console.log("$(this).data('id'));
-  //   const choreId = $(this).data('id');
-  //   console.log("choreId:  " + choreId);
-
-  //   // put data from html and put in object to push to global choresDone array
-  //   assignedchore = {
-  //     choreId: choreId,
-  //     childId: 1,
-  //   };
-  //   console.log("assignedchore object: ");
-  //   console.log(assignedchore);
-
-  //   // copy this element to the assigned chores list in column 2 of the html
-  //   //       $(this).parent().parent().addClass("todelete");
-  //   // change as needed...
-
-  //   // write to database
-  //       //   $.post(`/api/donechores/${childId}/${choreDone.choreId}`, () => {
-  //       // $.ajax({
-  //       //   method: 'DELETE',
-  //       //   url: `/api/assignedchores/${choreDone.id}`,
-  //       // })
-  //       //   .then(() => {
-  //       //     console.log(`Chore:${choreDone.id} deleted from AssignedChores.`);
-  //       //   })
-  //       //   .then(() => {
-  //       //     $.ajax({
-  //       //       method: 'PUT',
-  //       //       url: `/api/children/${childId}/${pointsEarned}`,
-  //       //     }).catch((err) => {
-  //       //       console.log(err);
-  //       //     });
-  //       //   }); // end of ajax calls
-
-  //     // }); // end of post donechores
-
-  // }); // end bind click stmt to listen for click on chore icon in first column
+  }); // end click on icon to assign chore block
+  
+  //
+  //
 }); // end of $(document).ready
