@@ -169,7 +169,7 @@ router.post('/assignedchores/:childid/:choreid', (req, res) => {
     ChildId: req.params.childid,
     ChoreId: req.params.choreid,
   }).then((dbChore) => {
-    res.json(dbChore.id); // returns the chore id
+    res.json(dbChore); // returns the whole chore object (need the new id - Maura)
   });
 });
 
