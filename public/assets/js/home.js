@@ -24,25 +24,24 @@ $(document).ready(() => {
 
     // beginning of icon element is always the same.
     // <div for the col>
-    begIconEl = '<div class="col s12 m4 left iconbutton icons"> '; // start div for column with this icon button
-    // <button> - not active on home page, only on child's page
-    begIconEl += '<button class="waves-effect waves-light z-depth-2 disabled'; // most of button tag. close after data-id added
+    begIconEl += '<div class="card grey lighten-2">';
+    // most of button tag. close after data-id added
+    begIconEl
+      += '<div class="disabled" ';
 
     $.get('api/chores', (chores) => {
       //  For each Chore, build an html icon (w/points),
       chores.forEach((chore) => {
-        console.log(chore);
 
         // customize the image part of the icon element w/image, title and points; and append
         iconEl = begIconEl; // beginning
-        iconEl += `data-id="${chore.id}"> `; // data id with chore id so we know what was clicked
+        // data id with chore id, chore title and file with icon image to use when clicked on to assign a chore
+        iconEl += `data-id="${chore.id}" data-title="${chore.title}" data-file="${chore.iconfile}" data-points="${chore.points}"> `;
         iconEl += '<img class="responsive-img" '; // start image tag w/class
         iconEl += `src="assets/css/images/${chore.iconfile}" `; // source for image
         iconEl += `alt="${chore.title}">`; // alt for image
         iconEl += `${chore.points}`; // text for image with the points
-        // iconEl += `${chore.points}`; // text for image
-        iconEl += '</img></button></div>'; // and end tags
-        console.log(iconEl);
+        iconEl += '</img></div></div>'; // and end tags
 
         // append row to html file in column 2
         $('.column1').append(iconEl);
