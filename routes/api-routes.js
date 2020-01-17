@@ -1,6 +1,11 @@
+/* eslint-disable quotes */
+/* eslint-disable consistent-return */
+/* eslint-disable func-names */
+/* eslint-disable prefer-arrow-callback */
 /* eslint-disable no-unused-vars */
 const router = require('express').Router();
 const db = require('../models');
+const email = require('../email.js');
 
 // get list of chores
 router.get('/chores', (req, res) => {
@@ -176,6 +181,17 @@ router.delete('/assignedchores/:childid/:choreid', (req, res) => {
 // 1)  add a record to the usedpoints table
 router.post('/usedpoints/:childid/:rewardid', (req, res) => {
   // console.log(`This is the response ${res}`);
+  db.Parent.findOne({}).then((dbParent) => {
+    email.transporter.sendMail(email.mailOptions(dbParent.email, 'Your child has redeemed a reward', `<p> Your child has chosen a reward </p>`), function (error, info) {
+      if (error) {
+        return console.log(error);
+      }
+      console.log('Message sent: %s', info.messageId);
+    });
+    // console.log(dbParent.email); // Maura  returned Andy@gmail.com!!
+    // console.log(dbParent.alt_email);
+  });
+
   db.UsedPoint.create({
     ChildId: req.params.childid,
     RewardId: req.params.rewardid,
@@ -228,6 +244,20 @@ router.get('/children/:id', (req, res) => {
   }).then((dbChild) => {
     res.json(dbChild);
     console.log('dbChild (for dbCHild.email):');
+  });
+});
+
+router.get('/emailChild', (res, req) => {
+  db.Parent.findOne({}).then((dbParent) => {
+    email.transporter.sendMail(email.mailOptions(dbParent.email, 'Your child is requesting parent approval', `<p> Your child has completed a chore. Head over to them to verify that they have done their chores. </p>`), function (error, info) {
+      if (error) {
+        return console.log(error);
+      }
+      console.log('Message sent: %s', info.messageId);
+      res.send('Email sent');
+    });
+    // console.log(dbParent.email); // Maura  returned Andy@gmail.com!!
+    // console.log(dbParent.alt_email);
   });
 });
 
