@@ -1,4 +1,6 @@
 ### Rewards App
+- Link to Github page:   [Github Rewards page](https://github.com/MauraSlavin/rewards)
+- Link to Heroku deployed app:   [Heroku Rewards link](https://limitless-tor-64679.herokuapp.com/)
 
 This is an interactive user-friendly geared towards children 12yrs and under.
 
@@ -29,10 +31,10 @@ This is an interactive user-friendly geared towards children 12yrs and under.
 
 ### Column 2 (“Chores to Do”):
     Starts with chores from the assignedChores table, as follows:
-        Each assigned chore is on it’s own row with
-            - Icon for the chore
-            - Check mark icon (clickable)
-            - Remove button (clickable)
+        Each assigned chore is on it’s own row with (each of these is clickable)
+            - Icon for the chore 
+            - Check mark icon
+            - Remove button
         At the bottom, after the list of assignedChores, there will be:
             - Request Parent Approval button (disabled until the first checkmark is clicked),
             - Parent Approved button (disabled until the Request Parent Approval button is clicked).
@@ -72,9 +74,9 @@ This is an interactive user-friendly geared towards children 12yrs and under.
 
 ### Dropdown list (same as CHILD page):
     Parent's name and Child's name retrieved from parents and children tables, respectively.
-    Child's name is in the green nav bar row (“(child)’s Rewards”… not just “Rewards”)
+    Child's name is in the green nav bar row ("Hello, <child's name>” on the right side of the nav bar)
 
-### Column 1:
+### Column 1 (rewards available to choose from):
     Starts with grid of icons with title & points, which are retrieved and built from the rewards table.
     Each reward icon is clickable, 
         and only enabled if the child has enough points for it.
@@ -82,7 +84,7 @@ This is an interactive user-friendly geared towards children 12yrs and under.
         - Duplicate icon is added to the second column
         - Submit button in column 2 becomes enabled
 
-### Column 2:
+### Column 2 (reward chosen, but not yet submitted):
     Starts with just disabled Submit button.
     When a reward is chosen the submit button is enabled.
     When the Submit button is chosen,
@@ -95,5 +97,14 @@ This is an interactive user-friendly geared towards children 12yrs and under.
 
 ### Technology used
         * Materialized CSS
-        * MySql Database
+        * MySql Database & Sequelize
+        * Mailtrap
+        * Nodemailer
+        * Express
+        * Node js
+
+### Database design
+    Diagram of the database structure:
+
+    ![Rewards-db](documentation/database-diagram.jpg)
 
