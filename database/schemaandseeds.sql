@@ -1,8 +1,10 @@
 DROP DATABASE IF EXISTS rewards_db;
 CREATE DATABASE rewards_db;
 
-USE rewards_db;
-
+-- test database
+USE rewards_db; 
+-- Heroku database
+USE vphg7hb2l22od01x;
 
 -- parent table
 DROP TABLE IF EXISTS parents;

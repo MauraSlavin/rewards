@@ -1,7 +1,10 @@
 DROP DATABASE IF EXISTS rewards_db;
 CREATE DATABASE rewards_db;
 
-USE rewards_db;
+-- test database
+USE rewards_db; 
+-- Heroku database
+USE vphg7hb2l22od01x;
 
 
 -- parent table
@@ -77,7 +80,7 @@ CREATE TABLE usedpoints (
 	id INTEGER AUTO_INCREMENT PRIMARY KEY,
 	RewardId INTEGER,
 	ChildId INTEGER,
-	createdAt DATETIME DEFAULT current_timestamp,
+    createdAt DATETIME DEFAULT current_timestamp,
     updatedAt DATETIME DEFAULT current_timestamp,
 	FOREIGN KEY (RewardId)
 		REFERENCES rewards(id),

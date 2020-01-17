@@ -31,3 +31,8 @@
 .rewardicons {
     margin-left: 30px;
 }
+
+/* set the width of the reward chosen (before it's redeemed) */
+.rewardChosen {
+    width: 150px;
+}
