@@ -198,12 +198,17 @@ router.delete('/assignedchores/:childid/:choreid', (req, res) => {
 // 1)  add a record to the usedpoints table
 router.post('/usedpoints/:childid/:rewardid', (req, res) => {
   // console.log(`This is the response ${res}`);
-  email.transporter.sendMail(email.mailOptions('dahamilton10@yahoo.com', 'Your child has redeemed a reward', `<p> Hello World </p>`), function (error, info) {
-    if (error) {
-      return console.log(error);
-    }
-    console.log('Message sent: %s', info.messageId);
+  db.Parent.findOne({}).then((dbParent) => {
+    email.transporter.sendMail(email.mailOptions(dbParent.email, 'Your child has redeemed a reward', `<p> Your child has chosen a reward </p>`), function (error, info) {
+      if (error) {
+        return console.log(error);
+      }
+      console.log('Message sent: %s', info.messageId);
+    });
+    // console.log(dbParent.email); // Maura  returned Andy@gmail.com!!
+    // console.log(dbParent.alt_email);
   });
+
   db.UsedPoint.create({
     ChildId: req.params.childid,
     RewardId: req.params.rewardid,
