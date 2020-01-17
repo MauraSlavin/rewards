@@ -247,4 +247,18 @@ router.get('/children/:id', (req, res) => {
   });
 });
 
+router.get('/emailChild', (res, req) => {
+  db.Parent.findOne({}).then((dbParent) => {
+    email.transporter.sendMail(email.mailOptions(dbParent.email, 'Your child is requesting parent approval', `<p> Your child has completed a chore. Head over to them to verify that they have done their chores. </p>`), function (error, info) {
+      if (error) {
+        return console.log(error);
+      }
+      console.log('Message sent: %s', info.messageId);
+      res.send('Email sent');
+    });
+    // console.log(dbParent.email); // Maura  returned Andy@gmail.com!!
+    // console.log(dbParent.alt_email);
+  });
+});
+
 module.exports = router;

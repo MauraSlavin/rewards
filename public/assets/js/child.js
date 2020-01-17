@@ -1,3 +1,5 @@
+/* eslint-disable eqeqeq */
+/* eslint-disable func-names */
 /* eslint-disable no-undef */
 /* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
@@ -49,7 +51,6 @@ $(document).ready(() => {
     $.get('api/chores', (chores) => {
       //  For each Chore, build an html icon (w/points),
       chores.forEach((chore) => {
-
         // customize the image part of the icon element w/image, title and points; and append
         iconEl = begIconEl; // beginning
         // data id with chore id, chore title and file with icon image to use when clicked on to assign a chore
@@ -342,6 +343,16 @@ $(document).ready(() => {
   $('.request').click(() => {
     // we know it's for child 1 because it only works for one child
     console.log('Request parental approval was clicked.');
+    $.ajax({
+      method: 'GET',
+      url: '/api/emailChild',
+    })
+      .then(() => {
+        console.log('An email has been sent');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     handleRequestApproval(1);
   }); // end clicking on "Parent approval button"
 
@@ -375,7 +386,7 @@ $(document).ready(() => {
     const points = $(this).data('points');
 
     // put data from html and put in object to push to global choresDone array
-    let choreDone = {
+    const choreDone = {
       id,
       choreId,
       points,
@@ -398,7 +409,8 @@ $(document).ready(() => {
     $(this)
       .parent()
       .parent().addClass('todelete')
-      .find('.checkbutton').attr('disabled', true)
+      .find('.checkbutton')
+      .attr('disabled', true)
       .find('img')
       .attr('src', 'assets/css/images/checkGreen.png');
 
@@ -414,7 +426,7 @@ $(document).ready(() => {
     const points = $(this).data('points');
 
     // put data from html and put in object to push to global choresDone array
-    let choreDone = {
+    const choreDone = {
       id,
       choreId,
       points,
@@ -441,8 +453,8 @@ $(document).ready(() => {
 
     // remove chore from doneChores array (if it's there)
     choresDone = $.grep(choresDone, (el, idx) => el.id == id, true);
-console.log('choresDone');
-console.log(choresDone);
+    console.log('choresDone');
+    console.log(choresDone);
     // delete from assignedChores table
     // we know it's child 1, since only implemented for 1 child.
     $.ajax({
@@ -485,7 +497,6 @@ console.log(choresDone);
           `Chore ${id} written to assigned chores table for child 1.`,
         );
         newAssignedChoreId = res.id;
-
       })
       .then(() => {
         // build the whole row, with the icon, check and remove icons
@@ -534,9 +545,8 @@ console.log(choresDone);
       .catch(() => {
         console.log(`Error writing chore ${id} to assigned chores table.`);
       });
-
   }); // end click on icon to assign chore block
-  
+
   //
   //
 }); // end of $(document).ready
