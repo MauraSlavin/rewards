@@ -1,3 +1,17 @@
+### Rewards App
+
+This is an interactive user-friendly geared towards children 12yrs and under.
+
+### Useful Features:
+        * Heroku-deployment ready
+        * Lots of fun, colorful icons and background colors to get children excited and motivated
+
+### How to use this app
+        From the landing page both child(ren) and parent(s) logs in to get started
+        * From the dropout menu Parent logs in to register/add child, assign chores, and approves chores that have been marked as complete.
+        * Child logs in onto his/her own personalized page to be able to get started
+        
+
 ## CHILD page:
 
 ### Dropdown list:
@@ -78,3 +92,8 @@
 	    - The reward icon in the second column goes away
     	- The submit button becomes disabled.
     	- Re-render page (or at least the first column) so rewards the child no longer has enough points for are disabled.
+
+### Technology used
+        * Materialized CSS
+        * MySql Database
+
