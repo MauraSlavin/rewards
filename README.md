@@ -16,11 +16,11 @@ this template is meant to get you up-and-running with a full-stack web applicati
 * run &nbsp; `npm install`
 * run &nbsp; `touch .env` &nbsp;in the root of your repository
 * open the .env file
-* add the four environmental variables that will be used to connect to the database:
-    <br/>       `DB_PASSWORD=yourpassword`
+* add the four eDB_PASSWORD=yourpassword`
     <br/>       `DB_HOST=127.0.0.1`
     <br/>       `DB_USER=root`
-    <br/>       `DB_NAME=sample_db`
+    <br/>       `DB_NAME=sample_db`nvironmental variables that will be used to connect to the database:
+    <br/>       `
 * run &nbsp; `npm start` to start the server with nodemon which will automatically refresh after any server-side code changes
 * ***check out the optional migrations and heroku deployment guides below!***
 

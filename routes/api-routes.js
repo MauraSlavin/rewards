@@ -22,9 +22,6 @@ router.get('/rewards', (req, res) => {
   console.log(`This is the response ${res}`);
   db.Reward.findAll({}).then((dbReward) => {
     res.json(dbReward);
-    dbReward.forEach((reward) => {
-      console.log(`Reward: ${reward.title} costs ${reward.points}.`);
-    });
   });
 });
 
@@ -32,18 +29,14 @@ router.get('/rewards', (req, res) => {
 // NOTE:  will always be  .../assignedchores/1  for first release, since only one child
 router.get('/assignedchores/:id', (req, res) => {
   console.log(`This is the response ${res}`);
-  //     // Include needed to get the name of the chore from the chores table
+  // Include needed to get the name of the chore from the chores table
   db.AssignedChore.findAll({
     where: {
       ChildId: req.params.id,
     },
     include: [db.Chore],
   }).then((dbChore) => {
-    res.json(dbChore); // Maura added
-    // console.log('Chores assigned:');
-    // dbChore.forEach((assignedchore) => {
-    //   console.log(assignedchore.Chore.title);
-    // });
+    res.json(dbChore);
   });
 });
 
@@ -56,11 +49,9 @@ router.get('/children/points/:id', (req, res) => {
     },
   }).then((dbChild) => {
     res.json(dbChild);
-    // console.log(`Child's points: ${dbChild.points}.`); // Maura  console logged 15 with test data
   });
 });
 
-// Maura added
 // get names of children in children table to populate dropdown list
 router.get('/children', (req, res) => {
   console.log(`This is the request ${req}`);
@@ -88,7 +79,6 @@ router.get('/assignedchores/choreid/:id', (req, res) => {
     },
   }).then((dbChore) => {
     const choreId = dbChore.ChoreId;
-    // console.log(`The choreId for this assigned chore is ${choreId}.`);
     res.json(dbChore);
   });
 });
@@ -103,7 +93,6 @@ router.get('/chores/points/:id', (req, res) => {
     },
   }).then((dbChore) => {
     const chorePoints = dbChore.points;
-    // console.log(`This chore is worth ${chorePoints} points.`);
     res.json(dbChore);
   });
 });
@@ -116,13 +105,13 @@ router.delete('/assignedchores/:id', (req, res) => {
     where: {
       id: req.params.id,
     },
-  }).then((dbAssignedChore) => {
-    res.json(200);
-    console.log(dbAssignedChore);
-    console.log(`Assigned chore with id of ${req.params.id} has been deleted.`);
-  }).catch(() => {
-    res.send(500, 'Error deleting a record from the assignedChores table.');
-  });
+  })
+    .then((dbAssignedChore) => {
+      res.json(200);
+    })
+    .catch(() => {
+      res.send(500, 'Error deleting a record from the assignedChores table.');
+    });
 });
 
 // FOURTH
@@ -137,8 +126,6 @@ router.put('/children/:id/:chorepoints', (req, res) => {
       id: req.params.id,
     },
   }).then((dbChild) => {
-    //   res.json(dbChild);  // Maura commented
-    console.log(dbChild); // Maura  console logged 15 with test data!
     console.log(
       `The child's points have been incremented by ${req.params.chorepoints}.`,
     );
@@ -155,8 +142,7 @@ router.post('/donechores/:childid/:choreid', (req, res) => {
     ChildId: req.params.childid,
     ChoreId: req.params.choreid,
   }).then((dbDone) => {
-    res.json(dbDone); // Maura commented
-    // console.log(dbDone); // Maura
+    res.json(dbDone);
     console.log(
       `A record of the done chore with chore id of ${req.params.choreid} has been added.`,
     );
@@ -170,9 +156,7 @@ router.post('/assignedchores/:childid/:choreid', (req, res) => {
     ChildId: req.params.childid,
     ChoreId: req.params.choreid,
   }).then((dbChore) => {
-    // res.json(dbChore);
-    console.log(dbChore); // Maura
-    console.log(`Chore ID ${req.params.choreid} has been assigned.`);
+    res.json(dbChore); // returns the whole chore object (need the new id)
   });
 });
 
@@ -186,7 +170,6 @@ router.delete('/assignedchores/:childid/:choreid', (req, res) => {
     },
   }).then((dbAssignedChore) => {
     //   res.json(dbAssignedChore);
-    console.log(dbAssignedChore);
     console.log(`Chore ID ${req.params.choreid} has been UN-assigned.`);
   });
 });
@@ -213,8 +196,6 @@ router.post('/usedpoints/:childid/:rewardid', (req, res) => {
     ChildId: req.params.childid,
     RewardId: req.params.rewardid,
   }).then((dbUsed) => {
-    //   res.json(dbUsed);  // Maura commented
-    console.log(dbUsed); // Maura
     console.log(`Reward ID# ${req.params.rewardid} has been chosen.`);
   });
 });
@@ -224,7 +205,7 @@ router.post('/usedpoints/:childid/:rewardid', (req, res) => {
 // Use router.put("/children/:id/:chorepoints"
 // from earlier in this module, sending a negative number.
 
-// Maura - get all parents info
+// get all parents info
 router.get('/parents', (req, res) => {
   // Here we add an "include" property to our options in our findOne query
   // We set the value to an array of the models we want to include in a left outer join
@@ -232,12 +213,10 @@ router.get('/parents', (req, res) => {
   console.log(`This is the response ${res}`);
   db.Parent.findAll({}).then((dbParent) => {
     res.json(dbParent);
-    // console.log(dbParent.email); // Maura  returned Andy@gmail.com!!
-    // console.log(dbParent.alt_email);
   });
 });
 
-// Maura - get parent email(s), given the parent id
+// get parent email(s), given the parent id
 router.get('/parents/:id', (req, res) => {
   // Here we add an "include" property to our options in our findOne query
   // We set the value to an array of the models we want to include in a left outer join
@@ -249,8 +228,6 @@ router.get('/parents/:id', (req, res) => {
     },
   }).then((dbParent) => {
     res.json(dbParent);
-    // console.log(dbParent.email); // Maura  returned Andy@gmail.com!!
-    // console.log(dbParent.alt_email);
   });
 });
 
@@ -267,8 +244,6 @@ router.get('/children/:id', (req, res) => {
   }).then((dbChild) => {
     res.json(dbChild);
     console.log('dbChild (for dbCHild.email):');
-    // console.log(dbChild);
-    // console.log(dbChild.email); // Maura  returned S@gmail.com!!
   });
 });
 

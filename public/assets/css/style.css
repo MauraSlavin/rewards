@@ -1,12 +1,22 @@
-.iconbutton {
-    margin-bottom: 20px;
-}
-
-.icons {
-    height: 140px;
-}
-
+/* to make chores in the first column wrap responsively */
+/* .flex, .column1, and .card */
 .flex {
     display: flex;
     flex-wrap: wrap;
+}
+
+.column1 {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    height: 100%;
+}
+
+.card {
+    flex: 0 1 28%;
+}
+
+/* mark checked chores to delete when approved */
+.todelete {
+    background-color: #23b1e9;
 }

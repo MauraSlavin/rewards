@@ -14,25 +14,24 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" href="/public/assets/css/style.css">
 
-  <title> Parent1 Authentication </title>
+  <title> Rewards </title>
 </head>
 
 <body>
+
   <div class="navbar-fixed">
     <nav>
       <div class="nav-wrapper teal">
         <a href="#!" class="brand-logo center">Rewards</a>
 
         <!--dropdown-->
+        <!--dropdown-->
         <ul id="dropdown1" class="dropdown-content">
-          <li><a href="parent1.html">Parent 1</a></li>
-          <li><a href="parent2.html">parent2</a></li>
+          <div class="parentlinks"></div>
           <li class="divider"></li>
-          <li><a href="index.html">Child 1</a></li>
-          <li><a href="child2.html">Child 2</a></li>
+          <div class="childlinks"></div>
           <li class="divider"></li>
           <li><a href="rewards.html">Rewards</a></li>
-          <li><a href="iconLibrary.html">Icons</a></li>
         </ul>
 
         <!--Mobile nav menu-->
@@ -56,10 +55,8 @@
   <!--mobile menu-->
   <ul class="sidenav" id="mobile-demo">
     <li><a href="home.html">Home</a></li>
-    <li><a href="parent1.html">Parent 1</a></li>
-    <li><a href="parent2.html">Parent 2</a></li>
-    <li><a href="index.html">Child 1</a></li>
-    <li><a href="child2.html">Child 2</a></li>
+    <div class="parentlinks"></div>
+    <div class="childlinks"></div>
     <li><a href="rewards.html">Rewards</a></li>
   </ul>
 
@@ -80,7 +77,7 @@
           <h1 class="center" style="margin-top: 0px;">Awesome Job!</h1>
           <h3>you've earned it!<h3>
         </div>
-        <!--right bow-->
+        <!-- right bow -->
         <div class="col s12 m2" style="margin-top: 40px;">
           <img class="responsive-img" class="icons" src="assets/css/images/ribbon.png" alt="ribbon"></img>
         </div>
@@ -92,52 +89,71 @@
     </div>
     <section class="section section-icons white center"></section>
     <div class="row" style="margin-bottom: 0px" ; style="margin-bottom: 0px;">
+
+      <!-- </div>
+        <!--middle col
+        <div class="col s12 m8">
+          <h1 class="center" style="margin-top: 0px;">Awesome Job!</h1>
+          <h3>you've earned it!<h3>
+        </div>
+        <!--right bow
+        <div class="col s12 m2" style="margin-top: 40px;">
+          <img class="responsive-img" class="icons" src="assets/css/images/ribbon.png" alt="ribbon"></img>
+        </div>
+
+      </div>
+
+      <h4 class="teal-text center" style="margin-top: 0px; margin-bottom:20px">Select Your Reward</h4>
+    -->
+
     </div>
-  </section>
 
   <!--Rewards icons-->
   <div class="row grey lighten-4 center">
-
     <div class="col s12 m8">
+
       <div class="card-panel light-blue lighten-2 " style="padding: 0px">
-
+        <div class="row"></div>
         <div class="row">
-          <div class="col s12 m2">
-            <button class="waves-effect waves-light hoverable z-depth-2 rewardBtn" id="1">
-              <img class="responsive-img" class="icons" src="assets/css/images/cinema.png" alt="movie">Movie Night 100
-              pts</img>
-            </button>
-          </div>
+          <div class="container">
+            <div class="col s12 m2">
+              <button class="waves-effect waves-light hoverable z-depth-2 rewardBtn" id="1">
+                <img class="responsive-img" class="icons" src="assets/css/images/cinema.png" alt="movie">Movie Night 100
+                pts</img>
+              </button>
+            </div>
 
-          <div class="col s12 m2">
-            <button class="waves-effect waves-light hoverable z-depth-2 rewardBtn" id="2">
-              <img class="responsive-img" class="icons" src="assets/css/images/computer.png" alt="screen">Screen Time
-              150 pts</img>
-            </button>
-          </div>
+            <div class="col s12 m2">
+              <button class="waves-effect waves-light hoverable z-depth-2 rewardBtn" id="2">
+                <img class="responsive-img" class="icons" src="assets/css/images/computer.png" alt="screen">Screen Time
+                150 pts</img>
+              </button>
+            </div>
 
-          <div class="col s12 m2">
-            <button class="waves-effect waves-light hoverable z-depth-2 rewardBtn" id="3">
-              <img class="responsive-img" class="icons" src="assets/css/images/family.png" alt="familytime">Family Time
-              175 pts</img>
-            </button>
-          </div>
+            <div class="col s12 m2">
+              <button class="waves-effect waves-light hoverable z-depth-2 rewardBtn" id="3">
+                <img class="responsive-img" class="icons" src="assets/css/images/family.png" alt="familytime">Family
+                Time
+                175 pts</img>
+              </button>
+            </div>
 
 
-          <div class="col s12 m2">
-            <button class="waves-effect waves-light hoverable z-depth-2 rewardBtn" id="4">
-              <img class="responsive-img" class="icons" src="assets/css/images/salary (1).png" alt="cash">$$ Money $$
-              300 pts</img>
-            </button>
-          </div>
-          <div class="col s12 m2">
-            <button class="waves-effect waves-light hoverable z-depth-2 rewardBtn" id="5">
-              <img class="responsive-img" class="icons" src="assets/css/images/playdate.png" alt="playdate">** Playdate
-              ** 250 pts</img>
-            </button>
+            <div class="col s12 m2">
+              <button class="waves-effect waves-light hoverable z-depth-2 rewardBtn" id="4">
+                <img class="responsive-img" class="icons" src="assets/css/images/salary (1).png" alt="cash"> Money
+                300 pts</img>
+              </button>
+            </div>
+            <div class="col s12 m2">
+              <button class="waves-effect waves-light hoverable z-depth-2 rewardBtn" id="5">
+                <img class="responsive-img" class="icons" src="assets/css/images/playdate.png" alt="playdate">Playdate
+                250 pts</img>
+              </button>
+            </div>
           </div>
         </div>
-
+        <div class="row"></div> 
       </div>
     </div>
 
@@ -147,13 +163,16 @@
 
         <!--Chosen reward to populate here-->
         <div class="row center" id="reward-display">
+          <div class="container">
           <img class="responsive-img" class="materialboxed" style="width:30px; height:30px;"
             src="assets/css/images/cinema.png" alt="movie">Movie Night 100 pts</img>
+          </div>
         </div>
         <!--Chosen reward to populate here-->
 
         <div class="row center">
-          <a href="" class="btn btn-sm green black-text waves-effect waves-light hoverable z-depth-2" id="reward-submit">
+          <a href="" class="btn btn-sm green black-text waves-effect waves-light hoverable z-depth-2"
+            id="reward-submit">
             <strong>Submit Your Reward!</strong>
           </a>
         </div>
