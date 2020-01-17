@@ -106,5 +106,5 @@ This is an interactive user-friendly geared towards children 12yrs and under.
 ### Database design
     Diagram of the database structure:
 
-    ![Rewards-db](documentation/database-diagram.jpg)
+![Rewards database design](documentation/database-diagram.jpg)
 
