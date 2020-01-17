@@ -2,21 +2,24 @@
 /* eslint-disable prefer-arrow-callback */
 /* eslint-disable func-names */
 
-// testing if the page is linked to the html page
-console.log('hello world');
 let ptsBalance = 0; // Global because it's needed in more than one place
 
 function loadRewardIcons() {
   //  iconEl is the html elements for the icon
+  console.log("Loading rewards icons. Only eligible ones will be clickable.");
+  console.log("Points balance: " + ptsBalance);
   let iconEl = '';
 
   // <div for the col>
-  const colEl = '<div class="col s12 m2"><div class="row flex">';
+  // flex is to space the row nicely; 
+  // todelete is to delete and re-build so the right icons are enabled.
+  const colEl = '<div class="col s12 m2 todelete light-blue lighten-2"> <div class="row flex">';
 
   // button (gets closed after data-id added & (conditionally) a "disabled")
   const btnEl = '<button class="waves-effect waves-light hoverable z-depth-2 rewardBtn" ';
 
   $.get('api/rewards', (rewards) => {
+    console.log(rewards);
     //  For each Chore, build an html icon (w/points),
     rewards.forEach((reward) => {
       // customize the image part of the icon element w/image, title and points; and append
@@ -87,20 +90,29 @@ function loadParentNames() {
 //
 // Loads child's name and puts in on the html page in a couple places
 //  (nav bar on the right, and Congratulations box)
-function greetChild(childId) {
+function greetChildLoadRewards(childId) {
   $.get(`api/children/${childId}`, (child) => {
     // put child's name in wherever there's a greetname class
     $('.greetname').text(child.name);
     // put point balance in column 3 box
     ptsBalance = child.points; // ptsBalance is a global
+    console.log("ptsBalance assigned in greetChild: " + ptsBalance);
     $('#ptbalance').text(ptsBalance);
+  }).then(() => {
+    loadRewardIcons();
+  }).catch((err) => {
+    console.log(err);
   });
 }
 
-greetChild(1);
+// Load rewards can't run until greetChild part is done,
+//  so use .then in this function
+greetChildLoadRewards(1);
+console.log("After greetChild, ptsBalancs: " + ptsBalance);
+// Put childrens' names and parents' names in dropdown list
 loadChildrenNames();
 loadParentNames();
-loadRewardIcons();
+console.log("After page rendered, ptsBalancs: " + ptsBalance);
 
 // making sure the document is ready before I start binding click events
 $(document).ready(() => {
@@ -159,9 +171,14 @@ $(document).ready(() => {
             $('#ptbalance').text(ptsBalance);
           })
           .then(() => {
+            // remove reward icon chosen
+            // ...and all reward icons, to re-build with correct ones enabled.
             $('.todelete').remove();
+            // disable submit button (until another reward chosen)
             $('#reward-submit').attr('disabled', true);
+            // and update text
             $('#choose-txt').text('Choose your reward.');
+            loadRewardIcons(); // re-load icons with correct ones enabled.
           })
           .catch((err) => {
             console.log(err);
