@@ -116,7 +116,7 @@ $(document).ready(() => {
         $('.parentlinks').append(parentLink);
       }); // end of forEach
     }); // end of get
-  } // endof loadParentsNames function
+  } // endof loadParentNames function
 
   //
   //
