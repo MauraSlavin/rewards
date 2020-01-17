@@ -20,3 +20,8 @@
 .todelete {
     background-color: #23b1e9;
 }
+
+.rewardBtn {
+    width: 150px;
+    margin: 0 10px;
+}
