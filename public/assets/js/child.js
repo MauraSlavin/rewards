@@ -325,7 +325,6 @@ $(document).ready(() => {
   //
   //* *****************************************************************************************/
   // Get data from database and dynamically create html before showing the user the page.
-  console.log('Functions defined.');
   renderChildPage();
   console.log('Page is done loading.');
 
@@ -348,7 +347,7 @@ $(document).ready(() => {
       url: '/api/emailChild',
     })
       .then(() => {
-        console.log('An email has been sent');
+        console.log('An email has been sent to the parent.');
       })
       .catch((err) => {
         console.log(err);
@@ -453,8 +452,7 @@ $(document).ready(() => {
 
     // remove chore from doneChores array (if it's there)
     choresDone = $.grep(choresDone, (el, idx) => el.id == id, true);
-    console.log('choresDone');
-    console.log(choresDone);
+
     // delete from assignedChores table
     // we know it's child 1, since only implemented for 1 child.
     $.ajax({

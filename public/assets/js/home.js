@@ -4,7 +4,6 @@
 
 // Wait until page is loaded
 $(document).ready(() => {
-
   // array of chores child clicked as done.
   // each object has:
   // --- id: (assignedChores id)
@@ -32,7 +31,6 @@ $(document).ready(() => {
     $.get('api/chores', (chores) => {
       //  For each Chore, build an html icon (w/points),
       chores.forEach((chore) => {
-
         // customize the image part of the icon element w/image, title and points; and append
         iconEl = begIconEl; // beginning
         // data id with chore id, chore title and file with icon image to use when clicked on to assign a chore
@@ -63,7 +61,7 @@ $(document).ready(() => {
       $('#ptbalance').text(ptsBalance);
     });
     // partial build for second child
-    $.get(`api/children/2`, (child) => {
+    $.get('api/children/2', (child) => {
       // put child's name in wherever there's a greetname class
       $('.greetname2').text(child.name);
       // put point balance in column 3 box
@@ -103,10 +101,9 @@ $(document).ready(() => {
     }); // end of get
   } // endof loadParentsNames function
 
-  
 
-
-
+  //
+  //
   function renderChildPage() {
     // Greet the child by name on the right side of the nav bar
     //   and load total points balance
@@ -123,11 +120,8 @@ $(document).ready(() => {
 
     // Populate dropdown list with parent name from database
     loadParentNames();
-
   } // end of renderChildPage function
 
   // Get data from database and dynamically create html before showing the user the page.
   renderChildPage();
-
 }); // end of $(document).ready
-

@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /* eslint-disable max-len */
 /* eslint-disable prefer-arrow-callback */
 /* eslint-disable func-names */
@@ -5,13 +6,13 @@
 let ptsBalance = 0; // Global because it's needed in more than one place
 
 function loadRewardIcons() {
+  console.log('Loading rewards icons. Only eligible ones will be clickable.');
+  
   //  iconEl is the html elements for the icon
-  console.log("Loading rewards icons. Only eligible ones will be clickable.");
-  console.log("Points balance: " + ptsBalance);
   let iconEl = '';
 
   // <div for the col>
-  // flex is to space the row nicely; 
+  // flex is to space the row nicely;
   // todelete is to delete and re-build so the right icons are enabled.
   const colEl = '<div class="col s12 m2 todelete light-blue lighten-2"> <div class="row flex">';
 
@@ -19,7 +20,6 @@ function loadRewardIcons() {
   const btnEl = '<button class="waves-effect waves-light hoverable z-depth-2 rewardBtn" ';
 
   $.get('api/rewards', (rewards) => {
-    console.log(rewards);
     //  For each Chore, build an html icon (w/points),
     rewards.forEach((reward) => {
       // customize the image part of the icon element w/image, title and points; and append
@@ -96,23 +96,23 @@ function greetChildLoadRewards(childId) {
     $('.greetname').text(child.name);
     // put point balance in column 3 box
     ptsBalance = child.points; // ptsBalance is a global
-    console.log("ptsBalance assigned in greetChild: " + ptsBalance);
     $('#ptbalance').text(ptsBalance);
-  }).then(() => {
-    loadRewardIcons();
-  }).catch((err) => {
-    console.log(err);
-  });
+  })
+    .then(() => {
+      loadRewardIcons();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 // Load rewards can't run until greetChild part is done,
 //  so use .then in this function
 greetChildLoadRewards(1);
-console.log("After greetChild, ptsBalancs: " + ptsBalance);
+
 // Put childrens' names and parents' names in dropdown list
 loadChildrenNames();
 loadParentNames();
-console.log("After page rendered, ptsBalancs: " + ptsBalance);
 
 // making sure the document is ready before I start binding click events
 $(document).ready(() => {
@@ -120,32 +120,38 @@ $(document).ready(() => {
   $(document).on('click', '.rewardBtn', function (e) {
     e.preventDefault();
     // since this is just copy and pasting I'm just going to change the html of the reward-display to the html of what was clicked
-    const card = $(this)
-      .clone()
-      .addClass('todelete');
-    $('#reward-display').html(card);
-    $('.rewardBtn').attr('disabled', true);
-    $('#reward-submit').attr('disabled', false);
+    // and change what needs to be changed
+
+    // get id and points from icon clicked - we'll need that later to redeem the reward
+    const id = $(this).data('id');
+    const points = $(this).data('points');
+
+    // add the clone after #reward-display, and add a class so we know it's the reward chosen
+    const card = $(this).clone();
+    $('#reward-display').html(card).find('.rewardBtn').addClass('rewardChosen');
+    // remove a sibling that looks like it was added to the clone during the cloning process, but we don't need/want
+    // and set the size of the cloned im
+    $('.rewardChosen').find('img').siblings().remove();
+    // save the chore id and points in the html for when the reward chosen is submitted, 
+    // and enable the submit rewards button
+    $('#reward-submit').attr('disabled', false).attr('data-id', id).attr('data-points', points);
+    // Change the text of the now active button
     $('#choose-txt').text('Submit Your Reward!');
+
   });
 
   //
   // click event for the submit button
   $('#reward-submit').on('click', function (e) {
     e.preventDefault();
-    // This is to show what is clicked on
-    console.log('reward submit clicked');
 
-    // Now we need to get the id of the button in the reward display
-    const obj = $(this)
+    // Now we need to get the chores id & points from the button in the reward display
+    const btn = $(this)
       .parent()
       .parent()
       .find('.rewardBtn');
-
-    const rewardId = $(obj[0]).data('id');
-    const rewardPts = $(obj[0]).data('points');
-    console.log(`id: ${rewardId}`);
-    console.log(`pts: ${rewardPts}`);
+    const rewardId = $(btn[0]).data('id');
+    const rewardPts = $(btn[0]).data('points');
 
     // write to usedpoints
     // decrement points (var & database)
@@ -155,38 +161,36 @@ $(document).ready(() => {
       method: 'POST',
       url: `/api/usedpoints/1/${rewardId}`,
     })
-      .then(() => {
-        console.log("about to sub children's points in child table");
-      })
-      .then(() => {
-        $.ajax({
-          method: 'PUT',
-          url: `/api/children/1/sub/${rewardPts}`,
-        })
-          .then(() => {
-            console.log(`rewardPts: ${rewardPts}`);
-            // rewardsPts is a negative number - amount reward "costs"
-            ptsBalance -= rewardPts;
-            console.log(`ptsBalance: ${ptsBalance}`);
-            $('#ptbalance').text(ptsBalance);
-          })
-          .then(() => {
-            // remove reward icon chosen
-            // ...and all reward icons, to re-build with correct ones enabled.
-            $('.todelete').remove();
-            // disable submit button (until another reward chosen)
-            $('#reward-submit').attr('disabled', true);
-            // and update text
-            $('#choose-txt').text('Choose your reward.');
-            loadRewardIcons(); // re-load icons with correct ones enabled.
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      });
 
-    // }).then(function (response) {
-    //   console.log(response);
-    // });
-  });
-});
+    .then(() => {
+      $.ajax({
+        method: 'PUT',
+        url: `/api/children/1/sub/${rewardPts}`,
+      })
+
+      .then(() => {
+        // deduct points used to get the reward from the balance, and display on the html page
+        ptsBalance -= rewardPts;
+        $('#ptbalance').text(ptsBalance);
+      })
+
+      .then(() => {
+        // remove reward icon chosen
+        // ...and all reward icons, to re-build with correct ones enabled.
+        $('.todelete').remove();
+        // disable submit button (until another reward chosen)
+        $('#reward-submit').attr('disabled', true);
+        // and update text
+        $('#choose-txt').text('Choose your reward.');
+         // remove reward submitted as chosen on html page
+        $('.rewardChosen').remove();
+        loadRewardIcons(); // re-load icons with correct ones enabled.
+      })
+
+      .catch((err) => {
+        // error handling
+        console.log(err);
+      }); // end of .then chain started with ajax PUT call to route api/children/1/sub/rewardspts  
+    }); // end of .then chain started with ajax POST call to route api/usedpoints/1/rewardId
+  }); // end of click on #reward-submit
+}); // end of document ready

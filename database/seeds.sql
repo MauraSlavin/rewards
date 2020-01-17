@@ -6,13 +6,13 @@
 USE rewards_db;
 -- only uses one parent.  Needed for email address (and alt_email, if we get to that)
 -- second parent is for dropdown list, to prep for future enhancements.
--- DELETE FROM Parents;
+DELETE FROM Parents;
 INSERT INTO Parents (id, name, email) VALUES 
 	(1, 'Andrew', 'Andy@gmail.com'),
     (2, 'FunMom', 'mama@gmail.com');
 
 
--- DELETE FROM Children;
+DELETE FROM Children;
 -- in these seeds, Sophia did 220 worth of chores, and spent 175 chores for a balance of 45 point.
 INSERT INTO Children (id, name, email, points, Parent1Id, Parent2Id) VALUES 
 	(1, 'Sophia', 'S@gmail.com', 45, 1, 2), 
@@ -20,7 +20,7 @@ INSERT INTO Children (id, name, email, points, Parent1Id, Parent2Id) VALUES
  
 
 -- Put a few chores in the db
--- DELETE FROM Chores;
+DELETE FROM Chores;
 INSERT INTO Chores (id, title, points, iconfile) VALUES
 	(1, 'Bathe dog', 10, 'bath_dog.png'),
 	(2, 'Workbook', 10, 'do_worbook.png'),
@@ -41,7 +41,7 @@ INSERT INTO Chores (id, title, points, iconfile) VALUES
 
 
 -- put a few rewards in the db
--- DELETE FROM Rewards;
+DELETE FROM Rewards;
 INSERT INTO Rewards (id, title, points, iconfile) VALUES
 	(1, 'Movie Night', 100, 'cinema.png'),
 	(2, 'Screen Time', 150, 'computer.png'),
@@ -51,7 +51,7 @@ INSERT INTO Rewards (id, title, points, iconfile) VALUES
 
 
 -- put a few assignments in the db
--- DELETE FROM AssignedChores;
+DELETE FROM AssignedChores;
 INSERT INTO AssignedChores (id, ChoreId, ChildId) VALUES
 	(1, 8, 1),   -- chore #8, make bed, assigned to child 1 (20 pts)
     (2, 10, 1),   -- chore #10, Set table, assigned to child 1 (30 pts)
@@ -59,7 +59,7 @@ INSERT INTO AssignedChores (id, ChoreId, ChildId) VALUES
     
     
 -- put a few chore completed in the database
--- DELETE FROM DoneChores;
+DELETE FROM DoneChores;
 INSERT INTO DoneChores (id, ChildId, ChoreId) VALUES
 	(1, 1, 7),   -- chore #7, fold, assigned to child 1 (20 pts)
     (2, 1, 9),   -- chore #9, read, assigned to child 1 (20 pts) (a second time)
@@ -71,7 +71,7 @@ INSERT INTO DoneChores (id, ChildId, ChoreId) VALUES
     
 
 -- and a reward was given    
--- DELETE FROM UsedPoints;    
+DELETE FROM UsedPoints;    
 INSERT INTO UsedPoints (id, ChildId, RewardId) VALUES
 	(1, 1, 3);  -- child 1 got reward #3 (family time for 175 points)
     
