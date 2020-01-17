@@ -111,21 +111,24 @@ router.delete('/assignedchores/:id', (req, res) => {
 
 // FOURTH
 // Fourth Then update the total points for the child
-router.put('/children/:id/:chorepoints', (req, res) => {
+router.put('/children/:id/add/:chorepoints', (req, res) => {
   console.log(`This is the response ${res}`);
-  // const newPoints = points + req.params.chorepoints.
-  //   model.decrement(['number', 'count'], { by: 2, where: { foo: 'bar' } });
+  
   db.Child.increment('points', {
     by: req.params.chorepoints,
     where: {
       id: req.params.id,
     },
-  }).then((dbChild) => {
-    console.log(
-      `The child's points have been incremented by ${req.params.chorepoints}.`,
-    );
-    res.send('Your points have been added!');
-  });
+  })
+    .then((dbChild) => {
+      console.log(
+        `The child's points have been incremented by ${req.params.chorepoints}.`,
+      );
+      res.send('Your points have been added!');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 // FIFTH
@@ -181,6 +184,9 @@ router.post('/usedpoints/:childid/:rewardid', (req, res) => {
     RewardId: req.params.rewardid,
   }).then((dbUsed) => {
     console.log(`Reward ID# ${req.params.rewardid} has been chosen.`);
+    res.json(dbUsed);
+  }).catch((err) => {
+    console.log(err);
   });
 });
 //
@@ -231,4 +237,25 @@ router.get('/children/:id', (req, res) => {
   });
 });
 
+//
+//  Decrement the child's total points after a reward is claimed
+router.put('/children/:id/sub/:chorepoints', (req, res) => {
+  console.log(`This is the response ${res}`);
+  
+  db.Child.decrement('points', {
+    by: req.params.chorepoints,
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((dbChild) => {
+      console.log(
+        `The child's points have been decremented by ${req.params.chorepoints}.`,
+      );
+      res.send('Your points have been used for the reward and updated in the children table!');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 module.exports = router;

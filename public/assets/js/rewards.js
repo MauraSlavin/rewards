@@ -108,12 +108,16 @@ $(document).ready(() => {
   $(document).on('click', '.rewardBtn', function (e) {
     e.preventDefault();
     // since this is just copy and pasting I'm just going to change the html of the reward-display to the html of what was clicked
-    const card = $(this).clone();
+    const card = $(this)
+      .clone()
+      .addClass('todelete');
     $('#reward-display').html(card);
     $('.rewardBtn').attr('disabled', true);
     $('#reward-submit').attr('disabled', false);
     $('#choose-txt').text('Submit Your Reward!');
   });
+
+  //
   // click event for the submit button
   $('#reward-submit').on('click', function (e) {
     e.preventDefault();
@@ -127,7 +131,7 @@ $(document).ready(() => {
       .find('.rewardBtn');
 
     const rewardId = $(obj[0]).data('id');
-    const rewardPts = -$(obj[0]).data('points');
+    const rewardPts = $(obj[0]).data('points');
     console.log(`id: ${rewardId}`);
     console.log(`pts: ${rewardPts}`);
 
@@ -138,21 +142,32 @@ $(document).ready(() => {
     $.ajax({
       method: 'POST',
       url: `/api/usedpoints/1/${rewardId}`,
-      responseType: 'text',
     })
+      .then(() => {
+        console.log("about to sub children's points in child table");
+      })
       .then(() => {
         $.ajax({
           method: 'PUT',
-          url: `/api/children/1/${rewardPts}`,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
+          url: `/api/children/1/sub/${rewardPts}`,
+        })
+          .then(() => {
+            console.log(`rewardPts: ${rewardPts}`);
+            // rewardsPts is a negative number - amount reward "costs"
+            ptsBalance -= rewardPts;
+            console.log(`ptsBalance: ${ptsBalance}`);
+            $('#ptbalance').text(ptsBalance);
+          })
+          .then(() => {
+            $('.todelete').remove();
+            $('#reward-submit').attr('disabled', true);
+            $('#choose-txt').text('Choose your reward.');
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       });
 
-    // rewardsPts is a negative number - amount reward "costs"
-    ptsBalance += rewardPts;
-    $('#ptsearned').text(ptsBalance);
     // }).then(function (response) {
     //   console.log(response);
     // });

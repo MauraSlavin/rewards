@@ -249,7 +249,7 @@ $(document).ready(() => {
         .then(() => {
           $.ajax({
             method: 'PUT',
-            url: `/api/children/1/${choreDone.points}`,
+            url: `/api/children/1/add/${choreDone.points}`,
           })
             .then(() => {
               $.ajax({

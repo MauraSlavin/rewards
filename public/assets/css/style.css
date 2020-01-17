@@ -21,7 +21,13 @@
     background-color: #23b1e9;
 }
 
+/* consistent width that looks nice on rewards buttons */
 .rewardBtn {
     width: 150px;
-    margin: 0 10px;
+    margin: 10px;
+}
+
+/* a little space to the left of the rewards */
+.margin10 {
+    margin-left: 10px;
 }
