@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const usedpoint = sequelize.define('usedpoint', {
+  const usedpoint = sequelize.define('Usedpoint', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,

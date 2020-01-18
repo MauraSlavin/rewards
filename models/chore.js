@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const chore = sequelize.define('chore', {
+  const chore = sequelize.define('Chore', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
