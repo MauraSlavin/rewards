@@ -29,5 +29,5 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  return AssignedChore;
+  return assignedchore;
 };
