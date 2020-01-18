@@ -1,6 +1,6 @@
 ### Rewards App
 - Link to Github page:   [Github Rewards page](https://github.com/MauraSlavin/rewards)
-- Link to Heroku deployed app:   [Heroku Rewards link](https://limitless-tor-64679.herokuapp.com/)
+- Link to Heroku deployed app:   [Heroku Rewards link](https://enigmatic-caverns-81757.herokuapp.com/)
 
 This is an interactive user-friendly geared towards children 12yrs and under.
 
