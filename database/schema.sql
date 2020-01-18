@@ -1,9 +1,11 @@
+-- test database
 DROP DATABASE IF EXISTS rewards_db;
 CREATE DATABASE rewards_db;
-
--- test database
 USE rewards_db; 
+
 -- Heroku database
+DROP DATABASE IF EXISTS vphg7hb2l22od01x;
+CREATE DATABASE vphg7hb2l22od01x;
 USE vphg7hb2l22od01x;
 
 
@@ -27,12 +29,9 @@ CREATE TABLE children (
 	email VARCHAR(255) NOT NULL,
 	points INTEGER DEFAULT 0,
 	Parent1Id INTEGER NOT NULL,
-	Parent2Id INTEGER,
     createdAt DATETIME DEFAULT current_timestamp,
     updatedAt DATETIME DEFAULT current_timestamp,
 	FOREIGN KEY (Parent1Id)
-		REFERENCES parents(id),
-	FOREIGN KEY (Parent2Id)
 		REFERENCES parents(id)
 	);
     

@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Parent = sequelize.define('Parent', {
+  const parent = sequelize.define('parent', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -34,5 +34,5 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  return Parent;
+  return parent;
 };

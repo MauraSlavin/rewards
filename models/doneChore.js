@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const DoneChore = sequelize.define('DoneChore', {
+  const donechore = sequelize.define('donechore', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -13,19 +13,19 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  DoneChore.associate = (models) => {
-    // We're saying that a DoneChore should belong to a Child and to a Chore
-    DoneChore.belongsTo(models.Child, {
+  donechore.associate = (models) => {
+    // We're saying that a donechore should belong to a Child and to a Chore
+    donechore.belongsTo(models.Child, {
       foreignKey: {
         allowNull: false,
       },
     });
-    DoneChore.belongsTo(models.Chore, {
+    donechore.belongsTo(models.Chore, {
       foreignKey: {
         allowNull: false,
       },
     });
   };
 
-  return DoneChore;
+  return donechore;
 };

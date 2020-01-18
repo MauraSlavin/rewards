@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const UsedPoint = sequelize.define('UsedPoint', {
+  const usedpoint = sequelize.define('usedpoint', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -15,19 +15,19 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  UsedPoint.associate = (models) => {
-    // We're saying that a UsedPoint should belong to a Child and to a Chore
-    UsedPoint.belongsTo(models.Child, {
+  usedpoint.associate = (models) => {
+    // We're saying that a usedpoint should belong to a Child and to a Chore
+    usedpoint.belongsTo(models.Child, {
       foreignKey: {
         allowNull: false,
       },
     });
-    UsedPoint.belongsTo(models.Reward, {
+    usedpoint.belongsTo(models.Reward, {
       foreignKey: {
         allowNull: false,
       },
     });
   };
 
-  return UsedPoint;
+  return usedpoint;
 };
