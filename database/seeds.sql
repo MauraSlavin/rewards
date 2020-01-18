@@ -19,7 +19,7 @@ INSERT INTO parents (id, name, email) VALUES
 
 -- DELETE FROM Children;
 -- in these seeds, Sophia did 220 worth of chores, and spent 175 chores for a balance of 45 point.
-INSERT INTO children (id, name, email, points, Parent1Id) VALUES 
+INSERT INTO kids (id, name, email, points, Parent1Id) VALUES 
 	(1, 'Sophia', 'S@gmail.com', 45, 1), 
 	(2, 'Lauren', 'Lauren@gmail.com', 0, 1);   -- just for testing (second parent can be NULL), 0 points
  
@@ -57,7 +57,7 @@ INSERT INTO rewards (id, title, points, iconfile) VALUES
 
 -- put a few assignments in the db
 -- DELETE FROM AssignedChores;
-INSERT INTO assignedchores (id, ChoreId, ChildId) VALUES
+INSERT INTO assignedchores (id, ChoreId, KidId) VALUES
 	(1, 8, 1),   -- chore #8, make bed, assigned to child 1 (20 pts)
     (2, 10, 1),   -- chore #10, Set table, assigned to child 1 (30 pts)
 	(3, 11, 1);   -- chore #11, Clear table, assigned to child 1 (30 pts)
@@ -65,7 +65,7 @@ INSERT INTO assignedchores (id, ChoreId, ChildId) VALUES
     
 -- put a few chore completed in the database
 -- DELETE FROM DoneChores;
-INSERT INTO donechores (id, ChildId, ChoreId) VALUES
+INSERT INTO donechores (id, KidId, ChoreId) VALUES
 	(1, 1, 7),   -- chore #7, fold, assigned to child 1 (20 pts)
     (2, 1, 9),   -- chore #9, read, assigned to child 1 (20 pts) (a second time)
 	(3, 1, 11),   -- chore #11, clear table, assigned to child 1 (30 pts)
@@ -77,13 +77,13 @@ INSERT INTO donechores (id, ChildId, ChoreId) VALUES
 
 -- and a reward was given    
 -- DELETE FROM UsedPoints;    
-INSERT INTO usedpoints (id, ChildId, RewardId) VALUES
+INSERT INTO usedpoints (id, KidId, RewardId) VALUES
 	(1, 1, 3);  -- child 1 got reward #3 (family time for 175 points)
     
 
 -- Verify each table has what you expect it to.
 SELECT * FROM parents;
-SELECT * FROM children;
+SELECT * FROM kids;
 SELECT * FROM chores;
 SELECT * FROM rewards;
 SELECT * FROM donechores;

@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
 
   usedpoint.associate = (models) => {
     // We're saying that a usedpoint should belong to a Child and to a Chore
-    usedpoint.belongsTo(models.Child, {
+    usedpoint.belongsTo(models.Kid, {
       foreignKey: {
         allowNull: false,
       },

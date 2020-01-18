@@ -22,8 +22,8 @@ CREATE TABLE parents (
 
 
 -- child table
-DROP TABLE IF EXISTS children;
-CREATE TABLE children (
+DROP TABLE IF EXISTS kids;
+CREATE TABLE kids (
 	id INTEGER AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(255) NOT NULL,
 	email VARCHAR(255) NOT NULL,
@@ -64,13 +64,13 @@ DROP TABLE IF EXISTS donechores;
 CREATE TABLE donechores (
 	id INTEGER AUTO_INCREMENT PRIMARY KEY,
 	ChoreId INTEGER,
-	ChildId INTEGER,
+	KidId INTEGER,
 	createdAt DATETIME DEFAULT current_timestamp,
     updatedAt DATETIME DEFAULT current_timestamp,
 	FOREIGN KEY (ChoreId)
 		REFERENCES chores(id),
-	FOREIGN KEY (ChildID)
-		REFERENCES children(id)
+	FOREIGN KEY (KidId)
+		REFERENCES kids(id)
 	);
 
 -- usedpoints table
@@ -78,13 +78,13 @@ DROP TABLE IF EXISTS usedpoints;
 CREATE TABLE usedpoints (
 	id INTEGER AUTO_INCREMENT PRIMARY KEY,
 	RewardId INTEGER,
-	ChildId INTEGER,
+	KidId INTEGER,
     createdAt DATETIME DEFAULT current_timestamp,
     updatedAt DATETIME DEFAULT current_timestamp,
 	FOREIGN KEY (RewardId)
 		REFERENCES rewards(id),
-	FOREIGN KEY (ChildId)
-		REFERENCES children(id)
+	FOREIGN KEY (KidId)
+		REFERENCES kids(id)
 	);
 
 -- assignedchores table
@@ -92,11 +92,11 @@ DROP TABLE IF EXISTS assignedchores;
 CREATE TABLE assignedchores (
 	id INTEGER AUTO_INCREMENT PRIMARY KEY,
 	ChoreId INTEGER,
-	ChildId INTEGER,
+	KidId INTEGER,
 	createdAt DATETIME DEFAULT current_timestamp,
     updatedAt DATETIME DEFAULT current_timestamp,
 	FOREIGN KEY (ChoreId)
 		REFERENCES chores(id),
-	FOREIGN KEY (ChildId)
-		REFERENCES children(id)
+	FOREIGN KEY (KidId)
+		REFERENCES kids(id)
 	);

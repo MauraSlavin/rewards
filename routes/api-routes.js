@@ -21,7 +21,7 @@ router.get("/rewards", (req, res) => {
   });
 });
 
-// get list of chores assigned by child id
+// get list of chores assigned by Kid id
 // NOTE:  will always be  .../assignedchores/1  for first release, since only one child
 router.get("/assignedchores/:id", (req, res) => {
   // Include needed to get the name of the chore from the chores table
@@ -29,7 +29,7 @@ router.get("/assignedchores/:id", (req, res) => {
   // We set the value to an array of the models we want to include in a left outer join
   db.Assignedchore.findAll({
     where: {
-      ChildId: req.params.id,
+      KidId: req.params.id,
     },
     include: [db.Chore],
   }).then((dbChore) => {
@@ -38,20 +38,20 @@ router.get("/assignedchores/:id", (req, res) => {
 });
 
 // get child's total points
-router.get("/children/points/:id", (req, res) => {
-  db.Child.findOne({
+router.get("/kids/points/:id", (req, res) => {
+  db.Kid.findOne({
     where: {
       id: req.params.id,
     },
-  }).then((dbChild) => {
-    res.json(dbChild);
+  }).then((dbKid) => {
+    res.json(dbKid);
   });
 });
 
-// get names of children in children table to populate dropdown list
-router.get("/children", (req, res) => {
-  db.Child.findAll({}).then((dbChild) => {
-    res.json(dbChild);
+// get names of children in kids table to populate dropdown list
+router.get("/kids", (req, res) => {
+  db.Kid.findAll({}).then((dbKid) => {
+    res.json(dbKid);
   });
 });
 
@@ -65,16 +65,16 @@ router.get("/children", (req, res) => {
 
 // FIRST
 // First - get the choreId from the assignedchores table
-router.get("/assignedchores/choreid/:id", (req, res) => {
-  db.Assignedchore.findOne({
-    where: {
-      id: req.params.id,
-    },
-  }).then((dbChore) => {
-    const choreId = dbChore.ChoreId;
-    res.json(dbChore);
-  });
-});
+// router.get("/assignedchores/choreid/:id", (req, res) => {
+//   db.Assignedchore.findOne({
+//     where: {
+//       id: req.params.id,
+//     },
+//   }).then((dbChore) => {
+//     const choreId = dbChore.ChoreId;
+//     res.json(dbChore);
+//   });
+// });
 
 // SECOND
 // Second - get chorepoints
@@ -107,14 +107,14 @@ router.delete("/assignedchores/:id", (req, res) => {
 
 // FOURTH
 // Fourth Then update the total points for the child
-router.put("/children/:id/add/:chorepoints", (req, res) => {
-  db.Child.increment("points", {
+router.put("/kids/:id/add/:chorepoints", (req, res) => {
+  db.Kid.increment("points", {
     by: req.params.chorepoints,
     where: {
       id: req.params.id,
     },
   })
-    .then((dbChild) => {
+    .then((dbKid) => {
       console.log(
         `The child's points have been incremented by ${req.params.chorepoints}.`,
       );
@@ -128,9 +128,9 @@ router.put("/children/:id/add/:chorepoints", (req, res) => {
 // FIFTH
 // Fifth - add a record to the donechores table
 // with the chore id and the child id
-router.post("/donechores/:childid/:choreid", (req, res) => {
+router.post("/donechores/:kidid/:choreid", (req, res) => {
   db.Donechore.create({
-    ChildId: req.params.childid,
+    KidId: req.params.kidid,
     ChoreId: req.params.choreid,
   }).then((dbDone) => {
     res.json(dbDone);
@@ -141,9 +141,9 @@ router.post("/donechores/:childid/:choreid", (req, res) => {
 });
 
 // Assign a chore to the child
-router.post("/assignedchores/:childid/:choreid", (req, res) => {
+router.post("/assignedchores/:kidid/:choreid", (req, res) => {
   db.Assignedchore.create({
-    ChildId: req.params.childid,
+    KidId: req.params.kidid,
     ChoreId: req.params.choreid,
   }).then((dbChore) => {
     res.json(dbChore); // returns the whole chore object (need the new id)
@@ -151,10 +151,10 @@ router.post("/assignedchores/:childid/:choreid", (req, res) => {
 });
 
 // Un-assign a chore from the child  (delete the record from the assignedchores table)
-router.delete("/assignedchores/:childid/:choreid", (req, res) => {
+router.delete("/assignedchores/:kidid/:choreid", (req, res) => {
   db.Assignedchore.destroy({
     where: {
-      ChildId: req.params.childid,
+      KidId: req.params.kidid,
       ChoreId: req.params.choreid,
     },
   }).then((dbAssignedChore) => {
@@ -166,12 +166,12 @@ router.delete("/assignedchores/:childid/:choreid", (req, res) => {
 // When a reward is chosen
 // 1)  send the parent an email
 // 2)  add a record to the pointsUsed table
-// 3)  subtract the points from the child's point total in the children table
+// 3)  subtract the points from the child's point total in the kids table
 
 // 1)  add a record to the usedpoints table
-router.post("/usedpoints/:childid/:rewardid", (req, res) => {
-  console.log("in usedpoints/childid/rewardid");
-  console.log(`childid: ${req.params.childid}`);
+router.post("/usedpoints/:kidid/:rewardid", (req, res) => {
+  console.log("in usedpoints/kidid/rewardid");
+  console.log(`kidid: ${req.params.kidid}`);
   console.log(`rewardid: ${req.params.rewardid}`);
   // console.log(`This is the response ${res}`);
   // 1)  send the parent an email
@@ -194,7 +194,7 @@ router.post("/usedpoints/:childid/:rewardid", (req, res) => {
 
   // 2)  add a record to the pointsUsed table
   db.Usedpoint.create({
-    ChildId: req.params.childid,
+    KidId: req.params.kidid,
     RewardId: req.params.rewardid,
   })
     .then((dbUsed) => {
@@ -207,8 +207,8 @@ router.post("/usedpoints/:childid/:rewardid", (req, res) => {
 });
 //
 
-// 3)  subtract the points from the child's point total in the children table
-// route /children/:id/sub/:chorepoints is called (route later in this module) from rewards.js
+// 3)  subtract the points from the child's point total in the kids table
+// route /kids/:id/sub/:chorepoints is called (route later in this module) from rewards.js
 
 // get all parents info
 router.get("/parents", (req, res) => {
@@ -232,32 +232,31 @@ router.get("/parents/:id", (req, res) => {
 });
 
 // get child email, given the child id
-router.get("/children/:id", (req, res) => {
-  db.Child.findOne({
+router.get("/kids/:id", (req, res) => {
+  db.Kid.findOne({
     where: {
       id: req.params.id,
     },
-  }).then((dbChild) => {
-    res.json(dbChild);
-    console.log("dbChild (for dbCHild.email):");
+  }).then((dbKid) => {
+    res.json(dbKid);
   });
 });
 
 //
 //  Decrement the child's total points after a reward is claimed
-router.put("/children/:id/sub/:chorepoints", (req, res) => {
-  db.Child.decrement("points", {
+router.put("/kids/:id/sub/:chorepoints", (req, res) => {
+  db.Kid.decrement("points", {
     by: req.params.chorepoints,
     where: {
       id: req.params.id,
     },
   })
-    .then((dbChild) => {
+    .then((dbKid) => {
       console.log(
         `The child's points have been decremented by ${req.params.chorepoints}.`,
       );
       res.send(
-        "Your points have been used for the reward and updated in the children table!",
+        "Your points have been used for the reward and updated in the kids table!",
       );
     })
     .catch((err) => {

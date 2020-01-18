@@ -52,20 +52,20 @@ $(document).ready(() => {
 
   // Loads child's name and puts in on the html page in a couple places
   //  (nav bar on the right, and Congratulations box)
-  function greetChild(childId) {
-    $.get(`api/children/${childId}`, (child) => {
+  function greetChild(kidId) {
+    $.get(`api/kids/${kidId}`, (kid) => {
       // put child's name in wherever there's a greetname class
-      $('.greetname').text(child.name);
+      $('.greetname').text(kid.name);
       // put point balance in column 3 box
-      ptsBalance = child.points; // ptsBalance is a global
+      ptsBalance = kid.points; // ptsBalance is a global
       $('#ptbalance').text(ptsBalance);
     });
     // partial build for second child
-    $.get('api/children/2', (child) => {
+    $.get('api/kids/2', (kid) => {
       // put child's name in wherever there's a greetname class
-      $('.greetname2').text(child.name);
+      $('.greetname2').text(kid.name);
       // put point balance in column 3 box
-      ptsBalance = child.points; // ptsBalance is a global
+      ptsBalance = kid.points; // ptsBalance is a global
       $('#ptbalance2').text(ptsBalance);
     });
   }
@@ -74,13 +74,13 @@ $(document).ready(() => {
   // and uses them for the dropdown list on the nav bar
   function loadChildrenNames() {
     // Get the children's names (the emails are available here, too)
-    $.get('api/children', (children) => {
-      let childLink = ''; // will be used for the html for the link
+    $.get('api/kids', (kids) => {
+      let kidLink = ''; // will be used for the html for the link
 
       // for each child, add a link to the dropdown list in the nav bar
-      children.forEach((child) => {
-        childLink = `<li><a href="child.html">${child.name}</a></li>`;
-        $('.childlinks').append(childLink);
+      kids.forEach((kid) => {
+        kidLink = `<li><a href="kid.html">${kid.name}</a></li>`;
+        $('.kidlinks').append(kidLink);
       });
     });
   } // endof loadChildrenNames function

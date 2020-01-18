@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const child = sequelize.define('Child', {
+  const kid = sequelize.define('Kid', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -31,21 +31,14 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  child.associate = (models) => {
-    // A child belongs to one or two parents
-    child.belongsTo(models.Parent, {
+  kid.associate = (models) => {
+    // A kid belongs to one or two parents
+    kid.belongsTo(models.Parent, {
       as: 'Parent1',
       foreignKey: {
         allowNull: false,
       },
     });
-    child.belongsTo(models.Parent, {
-      as: 'Parent2',
-      foreignKey: {
-        allowNull: true,
-      },
-    });
-
   };
-  return child;
+  return kid;
 };

@@ -57,13 +57,13 @@ function loadRewardIcons() {
 // and uses them for the dropdown list on the nav bar
 function loadChildrenNames() {
   // Get the children's names (the emails are available here, too)
-  $.get('api/children', (children) => {
-    let childLink = ''; // will be used for the html for the link
+  $.get('api/kids', (kids) => {
+    let kidLink = ''; // will be used for the html for the link
 
     // for each child, add a link to the dropdown list in the nav bar
-    children.forEach((child) => {
-      childLink = `<li><a href="child.html">${child.name}</a></li>`;
-      $('.childlinks').append(childLink);
+    kids.forEach((kid) => {
+      kidLink = `<li><a href="kid.html">${kid.name}</a></li>`;
+      $('.kidlinks').append(kidLink);
     });
   });
 } // endof loadChildrenNames function
@@ -90,12 +90,12 @@ function loadParentNames() {
 //
 // Loads child's name and puts in on the html page in a couple places
 //  (nav bar on the right, and Congratulations box)
-function greetChildLoadRewards(childId) {
-  $.get(`api/children/${childId}`, (child) => {
+function greetChildLoadRewards(kidId) {
+  $.get(`api/kids/${kidId}`, (kid) => {
     // put child's name in wherever there's a greetname class
-    $('.greetname').text(child.name);
+    $('.greetname').text(kid.name);
     // put point balance in column 3 box
-    ptsBalance = child.points; // ptsBalance is a global
+    ptsBalance = kid.points; // ptsBalance is a global
     $('#ptbalance').text(ptsBalance);
   })
     .then(() => {
@@ -165,7 +165,7 @@ $(document).ready(() => {
     .then(() => {
       $.ajax({
         method: 'PUT',
-        url: `/api/children/1/sub/${rewardPts}`,
+        url: `/api/kids/1/sub/${rewardPts}`,
       })
 
       .then(() => {

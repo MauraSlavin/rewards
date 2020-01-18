@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
 
   assignedchore.associate = (models) => {
     // We're saying that a AssignedChore should belong to a Child and to a Chore
-    assignedchore.belongsTo(models.Child, {
+    assignedchore.belongsTo(models.Kid, {
       foreignKey: {
         allowNull: false,
       },
