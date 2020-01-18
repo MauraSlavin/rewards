@@ -27,7 +27,7 @@ router.get("/assignedchores/:id", (req, res) => {
   // Include needed to get the name of the chore from the chores table
   // Here we add an "include" property to our options in our findAll query
   // We set the value to an array of the models we want to include in a left outer join
-  db.AssignedChore.findAll({
+  db.Assignedchore.findAll({
     where: {
       ChildId: req.params.id,
     },
@@ -66,7 +66,7 @@ router.get("/children", (req, res) => {
 // FIRST
 // First - get the choreId from the assignedchores table
 router.get("/assignedchores/choreid/:id", (req, res) => {
-  db.AssignedChore.findOne({
+  db.Assignedchore.findOne({
     where: {
       id: req.params.id,
     },
@@ -92,7 +92,7 @@ router.get("/chores/points/:id", (req, res) => {
 // THIRD
 // Third - destroy assignedchores record by assignedchore id
 router.delete("/assignedchores/:id", (req, res) => {
-  db.AssignedChore.destroy({
+  db.Assignedchore.destroy({
     where: {
       id: req.params.id,
     },
@@ -129,7 +129,7 @@ router.put("/children/:id/add/:chorepoints", (req, res) => {
 // Fifth - add a record to the donechores table
 // with the chore id and the child id
 router.post("/donechores/:childid/:choreid", (req, res) => {
-  db.DoneChore.create({
+  db.Donechore.create({
     ChildId: req.params.childid,
     ChoreId: req.params.choreid,
   }).then((dbDone) => {
@@ -142,7 +142,7 @@ router.post("/donechores/:childid/:choreid", (req, res) => {
 
 // Assign a chore to the child
 router.post("/assignedchores/:childid/:choreid", (req, res) => {
-  db.AssignedChore.create({
+  db.Assignedchore.create({
     ChildId: req.params.childid,
     ChoreId: req.params.choreid,
   }).then((dbChore) => {
@@ -152,7 +152,7 @@ router.post("/assignedchores/:childid/:choreid", (req, res) => {
 
 // Un-assign a chore from the child  (delete the record from the assignedchores table)
 router.delete("/assignedchores/:childid/:choreid", (req, res) => {
-  db.AssignedChore.destroy({
+  db.Assignedchore.destroy({
     where: {
       ChildId: req.params.childid,
       ChoreId: req.params.choreid,
@@ -193,7 +193,7 @@ router.post("/usedpoints/:childid/:rewardid", (req, res) => {
   });
 
   // 2)  add a record to the pointsUsed table
-  db.UsedPoint.create({
+  db.Usedpoint.create({
     ChildId: req.params.childid,
     RewardId: req.params.rewardid,
   })
